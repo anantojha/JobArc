@@ -1,7 +1,6 @@
 package com.comp4905.jobarc.Activity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -9,19 +8,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.comp4905.jobarc.Fragments.HomeFragment;
+import com.comp4905.jobarc.Fragments.EmployerHomeFragment;
 import com.comp4905.jobarc.Fragments.JobsFragment;
 import com.comp4905.jobarc.Fragments.ProfileFragment;
 import com.comp4905.jobarc.Fragments.SearchFragment;
 import com.comp4905.jobarc.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class JobViewActivity extends AppCompatActivity {
+public class EmployerJobViewActivity extends AppCompatActivity {
 
     TextView jobId, jobTitle, jobDescription, jobCreateDate;
     private BottomNavigationView bottomNavigationView;
 
-    private HomeFragment homeFragment;
+    private EmployerHomeFragment homeFragment;
     private JobsFragment jobsFragment = new JobsFragment();
     private SearchFragment searchFragment = new SearchFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
@@ -42,7 +41,7 @@ public class JobViewActivity extends AppCompatActivity {
         jobDescription.setText(getIntent().getStringExtra("description"));
         jobCreateDate.setText(getIntent().getStringExtra("createDate"));
 
-        bottomNavigationView = findViewById(R.id.navMenu);
+        bottomNavigationView = findViewById(R.id.navMenuJobseeker);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
 
@@ -71,7 +70,7 @@ public class JobViewActivity extends AppCompatActivity {
     @SuppressLint("ResourceType")
     private void setFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFrame, fragment);
+        ft.replace(R.id.mainFrameJobseeker, fragment);
         ft.commit();
     }
 }

@@ -11,20 +11,26 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.comp4905.jobarc.Activity.JobseekerDashboardActivity;
 import com.comp4905.jobarc.Adapters.HomeAdapter;
 import com.comp4905.jobarc.Models.Job;
 import com.comp4905.jobarc.Models.ModelHome;
 import com.comp4905.jobarc.R;
 import com.comp4905.jobarc.RetrofitClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment {
+public class EmployerHomeFragment extends Fragment {
 
     private static final String TAG = "Home Fragment: ";
     private HomeAdapter adapterHome;
@@ -32,9 +38,8 @@ public class HomeFragment extends Fragment {
     private List<Job> jobList = new ArrayList<>();
     private Long id;
 
-    public HomeFragment(Long id) {
+    public EmployerHomeFragment(Long id) {
         // Required empty public constructor
-        super();
         this.id = id;
     }
 
@@ -55,6 +60,7 @@ public class HomeFragment extends Fragment {
         }
         return view;
     }
+
 
 
     private void getDashboardData(long id){

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.comp4905.jobarc.Activity.JobViewActivity;
+import com.comp4905.jobarc.Activity.JobseekerJobViewActivity;
 import com.comp4905.jobarc.Models.Job;
 import com.comp4905.jobarc.R;
 
@@ -48,7 +48,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             Timestamp getCreateDate = data.getCreateDate();
 
             itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(view.getContext(), JobViewActivity.class);
+                Intent intent = new Intent(view.getContext(), JobseekerJobViewActivity.class);
                 intent.putExtra("id", getId);
                 intent.putExtra("title", getTitle);
                 intent.putExtra("description", getDescription);

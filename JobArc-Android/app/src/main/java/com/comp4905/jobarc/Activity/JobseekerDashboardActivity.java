@@ -4,33 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
-
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.comp4905.jobarc.Fragments.HomeFragment;
+import com.comp4905.jobarc.Fragments.JobSeekerHomeFragment;
 import com.comp4905.jobarc.Fragments.JobsFragment;
 import com.comp4905.jobarc.Fragments.ProfileFragment;
 import com.comp4905.jobarc.Fragments.SearchFragment;
 import com.comp4905.jobarc.R;
-import com.comp4905.jobarc.RetrofitClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class JobseekerDashboardActivity extends AppCompatActivity {
 
-    private HomeFragment homeFragment;
+    private JobSeekerHomeFragment homeFragment;
     private JobsFragment jobsFragment = new JobsFragment();
     private SearchFragment searchFragment = new SearchFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
@@ -40,15 +26,15 @@ public class JobseekerDashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_dashboard_jobseeker);
 
         String username = getIntent().getStringExtra("username");
         long id = getIntent().getLongExtra("id", -1L);
         String accountType = getIntent().getStringExtra("accountType");
 
-        homeFragment = new HomeFragment(id);
+        homeFragment = new JobSeekerHomeFragment(id);
 
-        bottomNavigationView = findViewById(R.id.navMenu);
+        bottomNavigationView = findViewById(R.id.navMenuJobseeker);
         setFragment(homeFragment);
         bottomNavigationView.setSelectedItemId(R.id.menuHome);
 
@@ -80,8 +66,55 @@ public class JobseekerDashboardActivity extends AppCompatActivity {
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFrame, fragment);
+        ft.replace(R.id.mainFrameJobseeker, fragment);
         ft.commit();
     }
 
 }
+
+
+//    TextView tvWelcome;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_dashboard_Employer);
+
+//        tvWelcome = findViewById(R.id.tvWelcome);
+//        long id = getIntent().getLongExtra("id", -1L);
+//        getDashboardData(id);
+//
+//        findViewById(R.id.btnLogout).setOnClickListener(view ->
+//                startActivity(new Intent(JobseekerDashboardActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
+//    }
+
+//    private void getDashboardData(long id){
+//        Call<ResponseBody> call = RetrofitClient
+//                .getInstance()
+//                .getAPI()
+//                .getDashboard(id);
+//
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                String s = "";
+//                JSONObject jsonObject = null;
+//
+//                try {
+//                    s = response.body().string();
+//                    if (s != null) {
+//                        jsonObject = new JSONObject(s);
+//                        String welcomeText = "Welcome, " + jsonObject.getString("name") + ".";
+//                        tvWelcome.setText(welcomeText);
+//                    }
+//                } catch (IOException | JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                Toast.makeText(JobseekerDashboardActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//    }

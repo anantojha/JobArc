@@ -9,10 +9,10 @@
     tools:context=".Activity.EmployerDashboardActivity">
 
     <FrameLayout
-        android:id="@+id/mainFrame"
+        android:id="@+id/mainFrameJobseeker"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/navMenu"
+        app:layout_constraintBottom_toTopOf="@+id/navMenuJobseeker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,34 +27,44 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/jobId"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
-
-                <TextView
                     android:id="@+id/jobTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="Title"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/jobId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Id"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="#494848" />
 
                 <TextView
                     android:id="@+id/jobDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:layout_marginTop="10dp"
+                    android:text="Description"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="#1E1D1D" />
 
                 <TextView
                     android:id="@+id/jobCreateDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:layout_marginTop="15dp"
+                    android:text="Date"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="#474545" />
             </LinearLayout>
         </ScrollView>
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navMenu"
+        android:id="@+id/navMenuJobseeker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
@@ -64,7 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainFrame" />
+        app:layout_constraintTop_toBottomOf="@+id/mainFrameJobseeker" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

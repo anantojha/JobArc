@@ -13,9 +13,6 @@
         android:theme="@style/Theme.JobArcAndroid"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activity.JobViewActivity"
-            android:exported="true" />
-        <activity
             android:name=".Activity.AccountTypeRegisterActivity"
             android:exported="true" />
         <activity
@@ -23,6 +20,12 @@
             android:exported="true" />
         <activity
             android:name=".Activity.EmployerDashboardActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.JobseekerJobViewActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.EmployerJobViewActivity"
             android:exported="true" />
         <activity
             android:name=".Activity.RegisterActivity"
