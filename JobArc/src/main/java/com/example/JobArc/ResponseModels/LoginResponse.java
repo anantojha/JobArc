@@ -3,23 +3,23 @@ package com.example.JobArc.ResponseModels;
 import com.example.JobArc.Enums.AccountType;
 
 public class LoginResponse {
-    private Status status;
+    private String status;
     private String username;
     private long id;
     private String accountType;
 
-    public LoginResponse(Status status, String username, long id, String accountType){
+    public LoginResponse(String status, String username, long id, String accountType){
         this.status = status;
         this.username = username;
         this.id = id;
         this.accountType = accountType;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

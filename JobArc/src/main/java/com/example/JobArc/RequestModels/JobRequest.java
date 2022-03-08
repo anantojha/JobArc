@@ -7,11 +7,15 @@ public class JobRequest {
     private @NotBlank String title;
     private @NotBlank String description;
     private @NotBlank long employerId;
+    private @NotBlank String location;
+    private @NotBlank String jobType;
 
-    public JobRequest(String title, String description, long employerId) {
+    public JobRequest(String title, String description, long employerId, String location, String jobType) {
         this.title = title;
         this.description = description;
         this.employerId = employerId;
+        this.location = location;
+        this.jobType = jobType;
     }
 
     public String getTitle() {
@@ -25,4 +29,8 @@ public class JobRequest {
     public long getEmployerId() {
         return employerId;
     }
+
+    public String getLocation() { return location; }
+
+    public String getJobType() { return jobType; }
 }

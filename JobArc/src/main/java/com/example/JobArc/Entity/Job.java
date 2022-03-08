@@ -16,20 +16,19 @@ public class Job {
     private @NotBlank @Column(name="create_date") Timestamp createDate;
     private @NotBlank @Column(name="description") String description;
     private @NotBlank @Column(name="title") String title;
+    private @NotBlank @Column(name="employer_name") String employerName;
+    private @NotBlank @Column(name="location") String location;
+    private @NotBlank @Column(name="job_type") String jobType;
 
     public Job() { }
 
-    public Job(@NotBlank String title, @NotBlank String description) {
+    public Job(@NotBlank String employerName, @NotBlank String title, @NotBlank String description, @NotBlank String location, @NotBlank String jobType) {
         this.title = title;
         this.description = description;
         this.createDate = new Timestamp(System.currentTimeMillis());
-    }
-
-    public Job(long id, Timestamp createDate, String description, String title) {
-        this.id = id;
-        this.createDate = createDate;
-        this.description = description;
-        this.title = title;
+        this.employerName = employerName;
+        this.location = location;
+        this.jobType = jobType;
     }
 
     @Override
@@ -62,6 +61,12 @@ public class Job {
         return createDate;
     }
 
+    public String getEmployerName() { return employerName; }
+
+    public String getLocation() { return location; }
+
+    public String getJobType() { return jobType; }
+
     @Override
     public String toString() {
         return "User{" +
@@ -69,6 +74,9 @@ public class Job {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", createDate=" + createDate.toString() +
+                ", employer='" + employerName + '\'' +
+                ", location='" + location + '\'' +
+                ", type='" + jobType + '\'' +
                 '}';
     }
 }

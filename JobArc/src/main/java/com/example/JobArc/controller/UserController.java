@@ -57,11 +57,10 @@ public class UserController {
         for (User other : users) {
             if (other.equals(user)) {
                 userRepository.save(other);
-                return new LoginResponse(Status.SUCCESS, other.getUsername(), other.getId(), other.getAccountType());
+                return new LoginResponse(other.getName(), other.getUsername(), other.getId(), other.getAccountType());
             }
         }
-
-        return new LoginResponse(Status.FAILURE, null, -1, null);
+        return new LoginResponse("FAILURE", null, -1, null);
     }
 
     @CrossOrigin()
@@ -87,10 +86,17 @@ public class UserController {
     @CrossOrigin()
     @PostMapping("/users/post_job")
     public Status postJob(@Valid @RequestBody JobRequest newJob) {
-        Job created = jobRepository.save(new Job(newJob.getTitle(), newJob.getDescription()));
-        JobMapping jobMapping = new JobMapping(created.getId(), newJob.getEmployerId());
-        jobMappingRepository.save(jobMapping);
-        return Status.SUCCESS;
+        Optional<User> optionalUser = userRepository.findById(newJob.getEmployerId());
+
+        if (optionalUser.isPresent()) {
+            User employer = optionalUser.get();
+            Job created = jobRepository.save(new Job(employer.getName(), newJob.getTitle(), newJob.getDescription(), newJob.getLocation(), newJob.getJobType()));
+            JobMapping jobMapping = new JobMapping(created.getId(), newJob.getEmployerId());
+            jobMappingRepository.save(jobMapping);
+            return Status.SUCCESS;
+        } else {
+            return Status.FAILURE;
+        }
     }
 
     @CrossOrigin()
