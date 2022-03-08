@@ -1,5 +1,6 @@
 package com.comp4905.jobarc;
 
+import com.comp4905.jobarc.Models.JobPost;
 import com.comp4905.jobarc.Models.ModelHome;
 import com.comp4905.jobarc.Models.User;
 
@@ -25,4 +26,9 @@ public interface API {
 
     @GET("users/dashboard")
     Call<ModelHome> getDashboard(@Query("id") long id);
+
+    @POST("users/post_job")
+    Call<ResponseBody> postJob (
+            @Body JobPost jobPost
+    );
 }

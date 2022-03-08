@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.comp4905.jobarc.Activity.EmployerJobViewActivity;
 import com.comp4905.jobarc.Activity.JobseekerJobViewActivity;
 import com.comp4905.jobarc.Models.Job;
 import com.comp4905.jobarc.R;
@@ -22,23 +23,29 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = "Adapter Home: ";
     private Context context;
     private List<Job> jobList;
+    private long userId;
+    private String username;
 
-    public HomeAdapter(Context context, List<Job> jobList){
+    public HomeAdapter(Context context, List<Job> jobList, long userId, String username){
         this.context = context;
         this.jobList = jobList;
+        this.userId = userId;
+        this.username = username;
     }
 
     class JobHolder extends RecyclerView.ViewHolder {
 
-        TextView jobId;
+        TextView jobEmployerName;
         TextView jobTitle;
         TextView jobCreateDate;
+        TextView jobLocation;
 
         public JobHolder(@NonNull View itemView) {
             super(itemView);
-            jobId = itemView.findViewById(R.id.JobId);
+            jobEmployerName = itemView.findViewById(R.id.JobRowEmployer);
             jobTitle = itemView.findViewById(R.id.JobTitle);
             jobCreateDate = itemView.findViewById(R.id.JobCreateDate);
+            jobLocation = itemView.findViewById(R.id.jobRowLocation);
         }
 
         public void setdata(Job data) {
@@ -46,19 +53,27 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             String getTitle = data.getTitle();
             String getDescription = data.getDescription();
             Timestamp getCreateDate = data.getCreateDate();
+            String getLocation = data.getLocation();
+            String getJobType = data.getJobType();
+            String getEmplyerName = data.getEmployerName();
 
             itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(view.getContext(), JobseekerJobViewActivity.class);
+                Intent intent = new Intent(view.getContext(), EmployerJobViewActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("username", getEmplyerName);
                 intent.putExtra("id", getId);
                 intent.putExtra("title", getTitle);
                 intent.putExtra("description", getDescription);
                 intent.putExtra("createDate", getCreateDate.toString());
+                intent.putExtra("location", getLocation);
+                intent.putExtra("type", getJobType);
                 view.getContext().startActivity(intent);
             });
 
-            jobId.setText(getId.toString());
+            jobEmployerName.setText(data.getEmployerName());
             jobTitle.setText(getTitle);
             jobCreateDate.setText(getCreateDate.toString());
+            jobLocation.setText(getLocation);
         }
     }
 

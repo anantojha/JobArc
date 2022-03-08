@@ -77,18 +77,21 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 try {
-                    if (jsonObject.get("status").equals("SUCCESS")) {
+                    if (!jsonObject.get("status").equals("FAILURE")) {
                         Toast.makeText(LoginActivity.this, "User logged in!", Toast.LENGTH_LONG).show();
 
                         if(jsonObject.get("accountType").toString().equals("employer")){
                             Intent intent = new Intent(LoginActivity.this, EmployerDashboardActivity.class);
                             intent.putExtra("id", Long.valueOf(jsonObject.get("id").toString()));
+                            intent.putExtra("name", jsonObject.get("status").toString());
                             intent.putExtra("username", jsonObject.get("username").toString());
                             intent.putExtra("accountType", jsonObject.get("accountType").toString());
                             startActivity(intent);
                         } else if (jsonObject.get("accountType").toString().equals("jobseeker")) {
                             Intent intent = new Intent(LoginActivity.this, JobseekerDashboardActivity.class);
                             intent.putExtra("id", Long.valueOf(jsonObject.get("id").toString()));
+                            intent.putExtra("name", jsonObject.get("status").toString());
+                            intent.putExtra("username", jsonObject.get("username").toString());
                             intent.putExtra("accountType", jsonObject.get("accountType").toString());
                             startActivity(intent);
                         }

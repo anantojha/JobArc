@@ -24,7 +24,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/jobTitle"
@@ -35,18 +35,31 @@
                     android:textColor="#000000" />
 
                 <TextView
-                    android:id="@+id/jobId"
+                    android:id="@+id/jobEmployer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Id"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="#494848" />
+                    android:text="Employer"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <TextView
+                    android:id="@+id/jobLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Location"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                <TextView
+                    android:id="@+id/jobType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Type"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                 <TextView
                     android:id="@+id/jobDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="25dp"
                     android:text="Description"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="#1E1D1D" />
@@ -55,10 +68,19 @@
                     android:id="@+id/jobCreateDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="20dp"
                     android:text="Date"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="#474545" />
+
+                <TextView
+                    android:id="@+id/jobId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Id"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="#494848" />
             </LinearLayout>
         </ScrollView>
     </FrameLayout>

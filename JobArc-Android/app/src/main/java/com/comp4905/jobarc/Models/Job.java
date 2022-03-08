@@ -24,16 +24,39 @@ public class Job {
     @Expose
     private Timestamp createDate;
 
-    public Job(long id, String title, String description, Timestamp createDate){
+    @SerializedName("employerName")
+    @Expose
+    private String employerName;
+
+    @SerializedName("location")
+    @Expose
+    private String location;
+
+    @SerializedName("jobType")
+    @Expose
+    private String jobType;
+
+    public Job(long id, String title, String description, Timestamp createDate, String employerName, String location, String jobType){
         this.id = id;
         this.title = title;
         this.description = description;
         this.createDate = createDate;
+        this.employerName = employerName;
+        this.location = location;
+        this.jobType = jobType;
     }
 
     public long getJobId() {
         return id;
     }
+
+    public long getId() { return id; }
+
+    public String getEmployerName() { return employerName; }
+
+    public String getLocation() { return location; }
+
+    public String getJobType() { return jobType; }
 
     public String getTitle() {
         return title;

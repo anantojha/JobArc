@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.comp4905.jobarc.Fragments.EmployerHomeFragment;
-import com.comp4905.jobarc.Fragments.JobsFragment;
+import com.comp4905.jobarc.Fragments.EmployerJobsFragment;
 import com.comp4905.jobarc.Fragments.ProfileFragment;
 import com.comp4905.jobarc.Fragments.SearchFragment;
 import com.comp4905.jobarc.R;
@@ -17,11 +17,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class EmployerJobViewActivity extends AppCompatActivity {
 
-    TextView jobId, jobTitle, jobDescription, jobCreateDate;
+    TextView jobId, jobEmployer, jobTitle, jobDescription, jobCreateDate, jobLocation, jobType;
     private BottomNavigationView bottomNavigationView;
+    private long userId;
+    private String username;
 
     private EmployerHomeFragment homeFragment;
-    private JobsFragment jobsFragment = new JobsFragment();
+    private EmployerJobsFragment jobsFragment;
     private SearchFragment searchFragment = new SearchFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
 
@@ -34,29 +36,37 @@ public class EmployerJobViewActivity extends AppCompatActivity {
         jobTitle = findViewById(R.id.jobTitle);
         jobDescription = findViewById(R.id.jobDescription);
         jobCreateDate= findViewById(R.id.jobCreateDate);
+        jobLocation = findViewById(R.id.jobLocation);
+        jobType = findViewById(R.id.jobType);
+        jobEmployer = findViewById(R.id.jobEmployer);
 
-
+        username = getIntent().getStringExtra("username");
+        userId = getIntent().getLongExtra("id", -1L);
         jobId.setText(String.valueOf(getIntent().getLongExtra("id", -1L)));
         jobTitle.setText(getIntent().getStringExtra("title"));
         jobDescription.setText(getIntent().getStringExtra("description"));
         jobCreateDate.setText(getIntent().getStringExtra("createDate"));
+        jobLocation.setText(getIntent().getStringExtra("location"));
+        jobType.setText(getIntent().getStringExtra("type"));
+        jobEmployer.setText(username);
 
         bottomNavigationView = findViewById(R.id.navMenuJobseeker);
+
+        jobsFragment = new EmployerJobsFragment(userId, username);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
 
                 switch (item.getItemId()) {
-                    case R.id.menuSettings:
+                    case R.id.menuJobs:
+                        finish();
                         setFragment(jobsFragment);
-                        getSupportActionBar().setTitle("Settings");
-                        return true;
                     case R.id.menuSearch:
+                        finish();
                         setFragment(searchFragment);
-                        getSupportActionBar().setTitle("Search");
                         return true;
                     case R.id.menuProfile:
+                        finish();
                         setFragment(profileFragment);
-                        getSupportActionBar().setTitle("Profile");
                         return true;
                     case R.id.menuHome:
                         finish();
@@ -67,7 +77,6 @@ public class EmployerJobViewActivity extends AppCompatActivity {
         });
     }
 
-    @SuppressLint("ResourceType")
     private void setFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.mainFrameJobseeker, fragment);

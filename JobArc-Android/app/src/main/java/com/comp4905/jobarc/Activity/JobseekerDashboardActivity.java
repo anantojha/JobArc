@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.comp4905.jobarc.Fragments.JobSeekerHomeFragment;
-import com.comp4905.jobarc.Fragments.JobsFragment;
+import com.comp4905.jobarc.Fragments.EmployerJobsFragment;
+import com.comp4905.jobarc.Fragments.JobSeekerJobsFragment;
 import com.comp4905.jobarc.Fragments.ProfileFragment;
 import com.comp4905.jobarc.Fragments.SearchFragment;
 import com.comp4905.jobarc.R;
@@ -17,7 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class JobseekerDashboardActivity extends AppCompatActivity {
 
     private JobSeekerHomeFragment homeFragment;
-    private JobsFragment jobsFragment = new JobsFragment();
+    private JobSeekerJobsFragment jobsFragment = new JobSeekerJobsFragment();
     private SearchFragment searchFragment = new SearchFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
 
@@ -28,11 +28,11 @@ public class JobseekerDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_jobseeker);
 
-        String username = getIntent().getStringExtra("username");
+        String username = getIntent().getStringExtra("name");
         long id = getIntent().getLongExtra("id", -1L);
         String accountType = getIntent().getStringExtra("accountType");
 
-        homeFragment = new JobSeekerHomeFragment(id);
+        homeFragment = new JobSeekerHomeFragment(id, username);
 
         bottomNavigationView = findViewById(R.id.navMenuJobseeker);
         setFragment(homeFragment);
@@ -43,7 +43,7 @@ public class JobseekerDashboardActivity extends AppCompatActivity {
                 return true;
             } else {
                 switch (item.getItemId()) {
-                    case R.id.menuSettings:
+                    case R.id.menuJobs:
                         setFragment(jobsFragment);
                         getSupportActionBar().setTitle("Settings");
                         return true;

@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.comp4905.jobarc.Fragments.EmployerHomeFragment;
-import com.comp4905.jobarc.Fragments.JobsFragment;
+import com.comp4905.jobarc.Fragments.EmployerJobsFragment;
 import com.comp4905.jobarc.Fragments.ProfileFragment;
 import com.comp4905.jobarc.Fragments.SearchFragment;
 import com.comp4905.jobarc.R;
@@ -16,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class EmployerDashboardActivity extends AppCompatActivity {
 
     private EmployerHomeFragment homeFragment;
-    private JobsFragment jobsFragment = new JobsFragment();
+    private EmployerJobsFragment jobsFragment;
     private SearchFragment searchFragment = new SearchFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
 
@@ -27,11 +27,12 @@ public class EmployerDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_jobseeker);
 
-        String username = getIntent().getStringExtra("username");
+        String username = getIntent().getStringExtra("name");
         long id = getIntent().getLongExtra("id", -1L);
         String accountType = getIntent().getStringExtra("accountType");
 
-        homeFragment = new EmployerHomeFragment(id);
+        homeFragment = new EmployerHomeFragment(id, username);
+        jobsFragment = new EmployerJobsFragment(id, username);
 
         bottomNavigationView = findViewById(R.id.navMenuJobseeker);
         setFragment(homeFragment);
@@ -42,21 +43,18 @@ public class EmployerDashboardActivity extends AppCompatActivity {
                 return true;
             } else {
                 switch (item.getItemId()) {
-                    case R.id.menuSettings:
+                    case R.id.menuJobs:
                         setFragment(jobsFragment);
-                        getSupportActionBar().setTitle("Settings");
                         return true;
                     case R.id.menuSearch:
                         setFragment(searchFragment);
-                        getSupportActionBar().setTitle("Search");
                         return true;
                     case R.id.menuProfile:
                         setFragment(profileFragment);
-                        getSupportActionBar().setTitle("Profile");
                         return true;
                     default:
+                        homeFragment = new EmployerHomeFragment(id, username);
                         setFragment(homeFragment);
-                        getSupportActionBar().setTitle("Home");
                         return true;
                 }
             }

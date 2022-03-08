@@ -1,6 +1,7 @@
 package com.comp4905.jobarc.Activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -9,7 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.comp4905.jobarc.Fragments.JobSeekerHomeFragment;
-import com.comp4905.jobarc.Fragments.JobsFragment;
+import com.comp4905.jobarc.Fragments.EmployerJobsFragment;
+import com.comp4905.jobarc.Fragments.JobSeekerJobsFragment;
 import com.comp4905.jobarc.Fragments.ProfileFragment;
 import com.comp4905.jobarc.Fragments.SearchFragment;
 import com.comp4905.jobarc.R;
@@ -21,7 +23,7 @@ public class JobseekerJobViewActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
 
     private JobSeekerHomeFragment homeFragment;
-    private JobsFragment jobsFragment = new JobsFragment();
+    private JobSeekerJobsFragment jobsFragment = new JobSeekerJobsFragment();
     private SearchFragment searchFragment = new SearchFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
 
@@ -46,17 +48,14 @@ public class JobseekerJobViewActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
 
                 switch (item.getItemId()) {
-                    case R.id.menuSettings:
-                        setFragment(jobsFragment);
-                        getSupportActionBar().setTitle("Settings");
-                        return true;
+                    case R.id.menuJobs:
+                        Intent intent = new Intent(JobseekerJobViewActivity.this, EmployerJobsFragment.class);
+                        startActivity(intent);
                     case R.id.menuSearch:
                         setFragment(searchFragment);
-                        getSupportActionBar().setTitle("Search");
                         return true;
                     case R.id.menuProfile:
                         setFragment(profileFragment);
-                        getSupportActionBar().setTitle("Profile");
                         return true;
                     case R.id.menuHome:
                         finish();
