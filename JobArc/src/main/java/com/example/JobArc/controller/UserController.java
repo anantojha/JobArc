@@ -8,9 +8,12 @@ import com.example.JobArc.Repository.JobMappingRepository;
 import com.example.JobArc.Repository.JobRepository;
 import com.example.JobArc.Repository.UserRepository;
 import com.example.JobArc.RequestModels.JobRequest;
+import com.example.JobArc.RequestModels.LoginRequest;
 import com.example.JobArc.ResponseModels.DashboardResponse;
 import com.example.JobArc.ResponseModels.LoginResponse;
+import com.example.JobArc.ResponseModels.ProfileResponse;
 import com.example.JobArc.ResponseModels.Status;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -45,19 +48,24 @@ public class UserController {
             }
         }
 
+        newUser.setPassword(Base64.encodeBase64String(newUser.getPassword().getBytes()));
         userRepository.save(newUser);
         return Status.SUCCESS;
     }
 
     @CrossOrigin()
     @PostMapping("/users/login")
-    public LoginResponse loginUser(@Valid @RequestBody User user) {
+    public LoginResponse loginUser(@Valid @RequestBody LoginRequest request) {
         List<User> users = userRepository.findAll();
 
-        for (User other : users) {
-            if (other.equals(user)) {
-                userRepository.save(other);
-                return new LoginResponse(other.getName(), other.getUsername(), other.getId(), other.getAccountType());
+        for (User user : users) {
+            if (user.getUsername().equals(request.getUsername())) {
+                // userRepository.save(other);
+                String decodedPassword = new String(Base64.decodeBase64(user.getPassword().getBytes()));
+                if(request.getPassword().equals(decodedPassword)){
+                    System.out.println("AUTHENTICATED USER" + user.getName());
+                    return new LoginResponse(user.getName(), user.getUsername(), user.getId(), user.getAccountType());
+                }
             }
         }
         return new LoginResponse("FAILURE", null, -1, null);
@@ -80,6 +88,18 @@ public class UserController {
             }
         }
 
+        return null;
+    }
+
+    @CrossOrigin()
+    @GetMapping("/users/profile")
+    public ProfileResponse profileDetails(@RequestParam long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isPresent()){
+            User user = optionalUser.get();
+            return new ProfileResponse(user.getName(), user.getUsername(), user.getAccountType(), user.getId());
+        }
         return null;
     }
 

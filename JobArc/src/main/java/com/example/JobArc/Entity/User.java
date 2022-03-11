@@ -69,6 +69,8 @@ public class User {
         return Objects.hash(id, name, username, password, accountType);
     }
 
+    public void setPassword(String password) { this.password = password; }
+
     @Override
     public String toString() {
         return "User{" +
