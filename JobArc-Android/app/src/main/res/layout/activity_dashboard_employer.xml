@@ -12,7 +12,6 @@
         android:id="@+id/mainFrameEmployer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#F1F0F0"
         app:layout_constraintBottom_toTopOf="@+id/navMenuEmployer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,17 +22,17 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navMenuEmployer"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="69dp"
         android:background="@android:color/white"
         app:itemBackground="?attr/selectableItemBackground"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/navmenu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainFrameEmployer" />
+        app:layout_constraintTop_toBottomOf="@+id/mainFrameEmployer"
+        app:menu="@menu/navmenu" />
 
-<!--    <TextView-->
+    <!--    <TextView-->
 <!--        android:id="@+id/tvTitle"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->

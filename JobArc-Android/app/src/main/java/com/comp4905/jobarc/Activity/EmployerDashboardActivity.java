@@ -18,7 +18,7 @@ public class EmployerDashboardActivity extends AppCompatActivity {
     private EmployerHomeFragment homeFragment;
     private EmployerJobsFragment jobsFragment;
     private SearchFragment searchFragment = new SearchFragment();
-    private ProfileFragment profileFragment = new ProfileFragment();
+    private ProfileFragment profileFragment;
 
     private BottomNavigationView bottomNavigationView;
 
@@ -31,8 +31,9 @@ public class EmployerDashboardActivity extends AppCompatActivity {
         long id = getIntent().getLongExtra("id", -1L);
         String accountType = getIntent().getStringExtra("accountType");
 
-        homeFragment = new EmployerHomeFragment(id, username);
-        jobsFragment = new EmployerJobsFragment(id, username);
+        homeFragment = new EmployerHomeFragment(id, username, accountType);
+        jobsFragment = new EmployerJobsFragment(id, username, accountType);
+        profileFragment = new ProfileFragment(id);
 
         bottomNavigationView = findViewById(R.id.navMenuJobseeker);
         setFragment(homeFragment);
@@ -53,7 +54,6 @@ public class EmployerDashboardActivity extends AppCompatActivity {
                         setFragment(profileFragment);
                         return true;
                     default:
-                        homeFragment = new EmployerHomeFragment(id, username);
                         setFragment(homeFragment);
                         return true;
                 }
@@ -67,4 +67,8 @@ public class EmployerDashboardActivity extends AppCompatActivity {
         ft.commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }

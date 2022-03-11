@@ -1,6 +1,5 @@
 package com.comp4905.jobarc.Activity;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -8,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.comp4905.jobarc.Fragments.EmployerHomeFragment;
 import com.comp4905.jobarc.Fragments.EmployerJobsFragment;
 import com.comp4905.jobarc.Fragments.ProfileFragment;
 import com.comp4905.jobarc.Fragments.SearchFragment;
@@ -21,16 +19,15 @@ public class EmployerJobViewActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private long userId;
     private String username;
-
-    private EmployerHomeFragment homeFragment;
+    private String accountType;
     private EmployerJobsFragment jobsFragment;
     private SearchFragment searchFragment = new SearchFragment();
-    private ProfileFragment profileFragment = new ProfileFragment();
+    private ProfileFragment profileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_view);
+        setContentView(R.layout.activity_job_view_employer);
 
         jobId = findViewById(R.id.jobId);
         jobTitle = findViewById(R.id.jobTitle);
@@ -41,6 +38,7 @@ public class EmployerJobViewActivity extends AppCompatActivity {
         jobEmployer = findViewById(R.id.jobEmployer);
 
         username = getIntent().getStringExtra("username");
+        accountType = getIntent().getStringExtra("accountType");
         userId = getIntent().getLongExtra("id", -1L);
         jobId.setText(String.valueOf(getIntent().getLongExtra("id", -1L)));
         jobTitle.setText(getIntent().getStringExtra("title"));
@@ -52,21 +50,22 @@ public class EmployerJobViewActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.navMenuJobseeker);
 
-        jobsFragment = new EmployerJobsFragment(userId, username);
+        jobsFragment = new EmployerJobsFragment(userId, username, accountType);
+        profileFragment = new ProfileFragment(userId);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
 
                 switch (item.getItemId()) {
                     case R.id.menuJobs:
                         finish();
-                        setFragment(jobsFragment);
+                        //setFragment(jobsFragment);
                     case R.id.menuSearch:
                         finish();
-                        setFragment(searchFragment);
+                        //setFragment(searchFragment);
                         return true;
                     case R.id.menuProfile:
                         finish();
-                        setFragment(profileFragment);
+                        //setFragment(profileFragment);
                         return true;
                     case R.id.menuHome:
                         finish();

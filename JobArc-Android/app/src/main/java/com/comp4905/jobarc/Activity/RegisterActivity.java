@@ -75,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getAPI()
-                .createUser(new User(userName, password).setAccountType(accountType).setName(name));
+                .createUser(new User(name, userName, password, accountType));
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override

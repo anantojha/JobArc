@@ -15,6 +15,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.comp4905.jobarc.Models.Login;
 import com.comp4905.jobarc.R;
 import com.comp4905.jobarc.RetrofitClient;
 import com.comp4905.jobarc.Models.User;
@@ -38,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser());
 
         findViewById(R.id.tvRegisterLink).setOnClickListener(view ->
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
+                startActivity(new Intent(LoginActivity.this, AccountTypeRegisterActivity.class)));
     }
 
     private void loginUser() {
@@ -58,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getAPI()
-                .checkUser(new User(username, password));
+                .checkUser(new Login(username, password));
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override

@@ -32,12 +32,14 @@ public class JobSeekerHomeFragment extends Fragment {
     private List<Job> jobList = new ArrayList<>();
     private Long id;
     private String username;
+    private String accountType;
 
-    public JobSeekerHomeFragment(Long id, String username) {
+    public JobSeekerHomeFragment(Long id, String username, String accountType) {
         // Required empty public constructor
         super();
         this.id = id;
         this.username = username;
+        this.accountType = accountType;
     }
 
     @Override
@@ -46,7 +48,7 @@ public class JobSeekerHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home_jobseeker, container, false);
         RecyclerView rv = view.findViewById(R.id.recyclerView);
-        adapterHome = new HomeAdapter(getContext(), jobList, id, username);
+        adapterHome = new HomeAdapter(getContext(), jobList, id, username, accountType);
         manager = new LinearLayoutManager(getContext());
         rv.setAdapter(adapterHome);
         rv.setLayoutManager(manager);

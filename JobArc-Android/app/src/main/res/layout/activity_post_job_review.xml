@@ -26,6 +26,7 @@
                 android:layout_marginTop="35dp"
                 android:layout_marginRight="20dp"
                 android:text="title"
+                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             <TextView
@@ -39,23 +40,23 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
-                android:id="@+id/jobTypeReview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="35dp"
-                android:layout_marginRight="20dp"
-                android:text="job type"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-            <TextView
                 android:id="@+id/locationReview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginRight="20dp"
                 android:text="location"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+            <TextView
+                android:id="@+id/jobTypeReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="20dp"
+                android:text="job type"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
             <TextView

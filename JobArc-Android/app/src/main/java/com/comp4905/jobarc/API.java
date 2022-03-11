@@ -1,7 +1,9 @@
 package com.comp4905.jobarc;
 
 import com.comp4905.jobarc.Models.JobPost;
+import com.comp4905.jobarc.Models.Login;
 import com.comp4905.jobarc.Models.ModelHome;
+import com.comp4905.jobarc.Models.Profile;
 import com.comp4905.jobarc.Models.User;
 
 
@@ -21,7 +23,7 @@ public interface API {
 
     @POST("users/login")
     Call<ResponseBody> checkUser (
-            @Body User user
+            @Body Login user
     );
 
     @GET("users/dashboard")
@@ -31,4 +33,7 @@ public interface API {
     Call<ResponseBody> postJob (
             @Body JobPost jobPost
     );
+
+    @GET("users/profile")
+    Call<Profile> getProfile(@Query("id") long id);
 }

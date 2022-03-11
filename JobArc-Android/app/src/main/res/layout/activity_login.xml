@@ -70,7 +70,7 @@
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
         android:text="LOGIN"
-        android:textColor="@android:color/background_dark"
+        android:textColor="@color/colorAccent"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

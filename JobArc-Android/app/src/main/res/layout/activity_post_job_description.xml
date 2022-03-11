@@ -25,6 +25,7 @@
                 android:layout_marginTop="75dp"
                 android:layout_marginRight="20dp"
                 android:text="Description:"
+                android:scrollHorizontally="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <EditText
@@ -36,7 +37,8 @@
                 android:layout_marginRight="15dp"
                 android:ems="10"
                 android:hint="Description"
-                android:inputType="text"
+                android:inputType="textMultiLine"
+                android:gravity="top"
                 android:textSize="20sp" />
 
             <Button

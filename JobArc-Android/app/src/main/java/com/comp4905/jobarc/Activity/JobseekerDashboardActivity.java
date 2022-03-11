@@ -17,9 +17,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class JobseekerDashboardActivity extends AppCompatActivity {
 
     private JobSeekerHomeFragment homeFragment;
-    private JobSeekerJobsFragment jobsFragment = new JobSeekerJobsFragment();
+    private JobSeekerJobsFragment jobsFragment;
     private SearchFragment searchFragment = new SearchFragment();
-    private ProfileFragment profileFragment = new ProfileFragment();
+    private ProfileFragment profileFragment;
 
     private BottomNavigationView bottomNavigationView;
 
@@ -32,7 +32,9 @@ public class JobseekerDashboardActivity extends AppCompatActivity {
         long id = getIntent().getLongExtra("id", -1L);
         String accountType = getIntent().getStringExtra("accountType");
 
-        homeFragment = new JobSeekerHomeFragment(id, username);
+        homeFragment = new JobSeekerHomeFragment(id, username, accountType);
+        jobsFragment = new JobSeekerJobsFragment(id, username, accountType);
+        profileFragment = new ProfileFragment(id);
 
         bottomNavigationView = findViewById(R.id.navMenuJobseeker);
         setFragment(homeFragment);
@@ -45,19 +47,15 @@ public class JobseekerDashboardActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.menuJobs:
                         setFragment(jobsFragment);
-                        getSupportActionBar().setTitle("Settings");
                         return true;
                     case R.id.menuSearch:
                         setFragment(searchFragment);
-                        getSupportActionBar().setTitle("Search");
                         return true;
                     case R.id.menuProfile:
                         setFragment(profileFragment);
-                        getSupportActionBar().setTitle("Profile");
                         return true;
                     default:
                         setFragment(homeFragment);
-                        getSupportActionBar().setTitle("Home");
                         return true;
                 }
             }
@@ -71,50 +69,3 @@ public class JobseekerDashboardActivity extends AppCompatActivity {
     }
 
 }
-
-
-//    TextView tvWelcome;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_dashboard_Employer);
-
-//        tvWelcome = findViewById(R.id.tvWelcome);
-//        long id = getIntent().getLongExtra("id", -1L);
-//        getDashboardData(id);
-//
-//        findViewById(R.id.btnLogout).setOnClickListener(view ->
-//                startActivity(new Intent(JobseekerDashboardActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
-//    }
-
-//    private void getDashboardData(long id){
-//        Call<ResponseBody> call = RetrofitClient
-//                .getInstance()
-//                .getAPI()
-//                .getDashboard(id);
-//
-//        call.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                String s = "";
-//                JSONObject jsonObject = null;
-//
-//                try {
-//                    s = response.body().string();
-//                    if (s != null) {
-//                        jsonObject = new JSONObject(s);
-//                        String welcomeText = "Welcome, " + jsonObject.getString("name") + ".";
-//                        tvWelcome.setText(welcomeText);
-//                    }
-//                } catch (IOException | JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                Toast.makeText(JobseekerDashboardActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-//            }
-//        });
-//    }

@@ -6,9 +6,11 @@ public class User {
     private String password;
     private String accountType;
 
-    public User(String username, String password) {
+    public User(String name, String username, String password, String accountType) {
+        this.name = name;
         this.username = username;
         this.password = password;
+        this.accountType = accountType;
     }
 
     public User setAccountType(String accountType) {

@@ -25,12 +25,14 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Job> jobList;
     private long userId;
     private String username;
+    private String accountType;
 
-    public HomeAdapter(Context context, List<Job> jobList, long userId, String username){
+    public HomeAdapter(Context context, List<Job> jobList, long userId, String username, String accountType){
         this.context = context;
         this.jobList = jobList;
         this.userId = userId;
         this.username = username;
+        this.accountType = accountType;
     }
 
     class JobHolder extends RecyclerView.ViewHolder {
@@ -58,16 +60,31 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             String getEmplyerName = data.getEmployerName();
 
             itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(view.getContext(), EmployerJobViewActivity.class);
-                intent.putExtra("userId", userId);
-                intent.putExtra("username", getEmplyerName);
-                intent.putExtra("id", getId);
-                intent.putExtra("title", getTitle);
-                intent.putExtra("description", getDescription);
-                intent.putExtra("createDate", getCreateDate.toString());
-                intent.putExtra("location", getLocation);
-                intent.putExtra("type", getJobType);
-                view.getContext().startActivity(intent);
+                if(accountType.equals("employer")) {
+                    Intent intent = new Intent(view.getContext(), EmployerJobViewActivity.class);
+                    intent.putExtra("userId", userId);
+                    intent.putExtra("username", getEmplyerName);
+                    intent.putExtra("accountType", accountType);
+                    intent.putExtra("id", getId);
+                    intent.putExtra("title", getTitle);
+                    intent.putExtra("description", getDescription);
+                    intent.putExtra("createDate", getCreateDate.toString());
+                    intent.putExtra("location", getLocation);
+                    intent.putExtra("type", getJobType);
+                    view.getContext().startActivity(intent);
+                } else {
+                    Intent intent = new Intent(view.getContext(), JobseekerJobViewActivity.class);
+                    intent.putExtra("userId", userId);
+                    intent.putExtra("username", getEmplyerName);
+                    intent.putExtra("accountType", accountType);
+                    intent.putExtra("id", getId);
+                    intent.putExtra("title", getTitle);
+                    intent.putExtra("description", getDescription);
+                    intent.putExtra("createDate", getCreateDate.toString());
+                    intent.putExtra("location", getLocation);
+                    intent.putExtra("type", getJobType);
+                    view.getContext().startActivity(intent);
+                }
             });
 
             jobEmployerName.setText(data.getEmployerName());
