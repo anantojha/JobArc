@@ -39,6 +39,7 @@ public class UserController {
     @CrossOrigin()
     @PostMapping("/users/register")
     public Status registerUser(@Valid @RequestBody User newUser) {
+        System.out.println("handle POST /register");
         List<User> users = userRepository.findAll();
 
         for (User user : users) {
@@ -56,6 +57,7 @@ public class UserController {
     @CrossOrigin()
     @PostMapping("/users/login")
     public LoginResponse loginUser(@Valid @RequestBody LoginRequest request) {
+        System.out.println("handle POST /login");
         List<User> users = userRepository.findAll();
 
         for (User user : users) {
@@ -74,6 +76,7 @@ public class UserController {
     @CrossOrigin()
     @GetMapping("/users/dashboard")
     public DashboardResponse dashboardDetails(@RequestParam long id) {
+        System.out.println("handle GET /dashboard");
         Optional<User> optionalUser = userRepository.findById(id);
         
         if (optionalUser.isPresent()){
@@ -94,6 +97,7 @@ public class UserController {
     @CrossOrigin()
     @GetMapping("/users/profile")
     public ProfileResponse profileDetails(@RequestParam long id) {
+        System.out.println("handle GET /profile");
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isPresent()){
@@ -106,6 +110,7 @@ public class UserController {
     @CrossOrigin()
     @PostMapping("/users/post_job")
     public Status postJob(@Valid @RequestBody JobRequest newJob) {
+        System.out.println("handle POST /post_job");
         Optional<User> optionalUser = userRepository.findById(newJob.getEmployerId());
 
         if (optionalUser.isPresent()) {
@@ -117,6 +122,19 @@ public class UserController {
         } else {
             return Status.FAILURE;
         }
+    }
+
+    @CrossOrigin()
+    @GetMapping("/users/job")
+    public Job jobDetails(@RequestParam long id) {
+        System.out.println("handle GET /job");
+        Optional<Job> optionalJob = jobRepository.findById(id);
+
+        if (optionalJob.isPresent()){
+            Job job = optionalJob.get();
+            return job;
+        }
+        return null;
     }
 
     @CrossOrigin()

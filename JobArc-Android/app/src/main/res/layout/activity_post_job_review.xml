@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     tools:context=".Activity.PostJobActivity">
 
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
@@ -25,8 +27,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="35dp"
                 android:layout_marginRight="20dp"
-                android:text="title"
                 android:gravity="center"
+                android:text="title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             <TextView
@@ -66,21 +68,27 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="35dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:overScrollMode="always"
                 android:text="description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <Button
                 android:id="@+id/jobPostSubmitBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginRight="50dp"
-                android:text="Submit" />
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/my_button"
+                android:text="Submit"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
 
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

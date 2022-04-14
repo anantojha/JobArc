@@ -54,7 +54,7 @@ public class EmployerDashboardActivity extends AppCompatActivity {
                         setFragment(profileFragment);
                         return true;
                     default:
-                        setFragment(homeFragment);
+                        setFragment(new EmployerHomeFragment(id, username, accountType));
                         return true;
                 }
             }
