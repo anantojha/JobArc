@@ -35,7 +35,7 @@
             android:hint="Description"
             android:inputType="textMultiLine"
             android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 

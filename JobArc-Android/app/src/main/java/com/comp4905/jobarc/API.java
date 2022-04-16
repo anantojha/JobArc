@@ -4,6 +4,8 @@ import com.comp4905.jobarc.Models.JobPost;
 import com.comp4905.jobarc.Models.Login;
 import com.comp4905.jobarc.Models.ModelHome;
 import com.comp4905.jobarc.Models.Profile;
+import com.comp4905.jobarc.Models.RegistrationResponse;
+import com.comp4905.jobarc.Models.ResumePost;
 import com.comp4905.jobarc.Models.User;
 
 
@@ -17,7 +19,7 @@ import retrofit2.http.Query;
 
 public interface API {
     @POST("users/register")
-    Call<ResponseBody> createUser (
+    Call<RegistrationResponse> createUser (
             @Body User user
     );
 
@@ -32,6 +34,11 @@ public interface API {
     @POST("users/post_job")
     Call<ResponseBody> postJob (
             @Body JobPost jobPost
+    );
+
+    @POST("users/post_resume")
+    Call<ResponseBody> postResume (
+            @Body ResumePost resumePost
     );
 
     @GET("users/profile")

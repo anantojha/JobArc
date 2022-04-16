@@ -23,7 +23,6 @@ import retrofit2.Response;
 
 public class PostJobReviewActivity extends AppCompatActivity {
 
-    Button backButton;
     Button submitButton;
     long id;
     String username;
@@ -31,7 +30,6 @@ public class PostJobReviewActivity extends AppCompatActivity {
     String jobType;
     String location;
     String description;
-
     TextView  titleView;
     TextView  employerNameView;
     TextView  locationView;
@@ -61,7 +59,6 @@ public class PostJobReviewActivity extends AppCompatActivity {
         locationView.setText(location);
         descriptionView.setText(description);
         jobTypeView.setText(jobType);
-
 
         submitButton = findViewById(R.id.jobPostSubmitBtn);
 
@@ -97,11 +94,6 @@ public class PostJobReviewActivity extends AppCompatActivity {
                     Toast.makeText(PostJobReviewActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
-
-
-
-
-
         });
     }
 }

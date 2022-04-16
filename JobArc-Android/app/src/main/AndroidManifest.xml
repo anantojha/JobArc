@@ -13,6 +13,15 @@
         android:theme="@style/Theme.JobArcAndroid"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.PostResumeDescriptionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.PostResumeEducationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.PostResumeWorkActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.PostJobActivity"
             android:exported="true" />
         <activity

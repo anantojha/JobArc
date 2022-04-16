@@ -15,6 +15,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.comp4905.jobarc.Models.RegistrationResponse;
 import com.comp4905.jobarc.R;
 import com.comp4905.jobarc.RetrofitClient;
 import com.comp4905.jobarc.Models.User;
@@ -72,31 +73,29 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        Call<ResponseBody> call = RetrofitClient
+        Call<RegistrationResponse> call = RetrofitClient
                 .getInstance()
                 .getAPI()
                 .createUser(new User(name, userName, password, accountType));
 
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<RegistrationResponse>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                String s = "";
-                try {
-                    s = response.body().string();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                if (s.equals("\"SUCCESS\"")) {
-                    Toast.makeText(RegisterActivity.this, "Successfully registered. Please login", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                } else {
-                    Toast.makeText(RegisterActivity.this, "User already exists!", Toast.LENGTH_LONG).show();
+            public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
+                RegistrationResponse res = response.body();
+                if (res != null){
+                    if (res.getStatus().equals("\"SUCCESS\"")) {
+                        Intent intent = new Intent();
+                        intent.putExtra("id", res.getId());
+                        startActivity(new Intent(RegisterActivity.this, PostResumeDescriptionActivity.class));
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "User already exists!", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
 
+
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<RegistrationResponse> call, Throwable t) {
                 Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
