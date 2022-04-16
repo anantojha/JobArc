@@ -1,4 +1,4 @@
-package com.example.JobArc.ResponseModels;
+package com.example.JobArc.Enums;
 
 public enum Status {
     SUCCESS,

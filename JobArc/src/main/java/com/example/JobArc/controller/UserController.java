@@ -1,28 +1,22 @@
 package com.example.JobArc.controller;
 
-import com.example.JobArc.Entity.Job;
-import com.example.JobArc.Entity.JobMapping;
-import com.example.JobArc.Entity.User;
+import com.example.JobArc.Entity.*;
 import com.example.JobArc.Enums.AccountType;
-import com.example.JobArc.Repository.JobMappingRepository;
-import com.example.JobArc.Repository.JobRepository;
-import com.example.JobArc.Repository.UserRepository;
+import com.example.JobArc.Repository.*;
 import com.example.JobArc.RequestModels.JobRequest;
 import com.example.JobArc.RequestModels.LoginRequest;
+import com.example.JobArc.RequestModels.ResumeRequest;
 import com.example.JobArc.ResponseModels.DashboardResponse;
 import com.example.JobArc.ResponseModels.LoginResponse;
 import com.example.JobArc.ResponseModels.ProfileResponse;
-import com.example.JobArc.ResponseModels.Status;
+import com.example.JobArc.Enums.Status;
+import com.example.JobArc.ResponseModels.RegistrationResponse;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,23 +29,27 @@ public class UserController {
     JobRepository jobRepository;
     @Autowired
     JobMappingRepository jobMappingRepository;
+    @Autowired
+    ResumeRepository resumeRepository;
+    @Autowired
+    ResumeMappingRepository resumeMappingRepository;
 
     @CrossOrigin()
     @PostMapping("/users/register")
-    public Status registerUser(@Valid @RequestBody User newUser) {
+    public RegistrationResponse registerUser(@Valid @RequestBody User newUser) {
         System.out.println("handle POST /register");
         List<User> users = userRepository.findAll();
 
         for (User user : users) {
             if (user.equals(newUser)) {
                 System.out.println("User Already exists!");
-                return Status.USER_ALREADY_EXISTS;
+                return new RegistrationResponse(Status.USER_ALREADY_EXISTS, -1, null);
             }
         }
 
         newUser.setPassword(Base64.encodeBase64String(newUser.getPassword().getBytes()));
-        userRepository.save(newUser);
-        return Status.SUCCESS;
+        User user = userRepository.save(newUser);
+        return new RegistrationResponse(Status.SUCCESS, user.getId(), user.getName());
     }
 
     @CrossOrigin()
@@ -135,6 +133,26 @@ public class UserController {
             return job;
         }
         return null;
+    }
+
+    // upload resume endpoint
+    @CrossOrigin()
+    @PostMapping("/users/post_resume")
+    public Status postResume(@Valid @RequestBody ResumeRequest newResume) {
+        System.out.println("handle POST /post_resume");
+        Optional<User> optionalUser = userRepository.findById(newResume.getJobseekerId());
+
+        if (optionalUser.isPresent()) {
+            User jobseeker = optionalUser.get();
+            Resume created = resumeRepository.save(new Resume(jobseeker.getName(),
+                    newResume.getDescription(), newResume.getEducationOne(), newResume.getEducationTwo(), newResume.getEducationThree(),
+                    newResume.getWorkOne(), newResume.getWorkTwo(), newResume.getWorkThree(), newResume.getSkills(), newResume.getCertifications()));
+            ResumeMapping resumeMapping = new ResumeMapping(created.getId(), newResume.getJobseekerId());
+            resumeMappingRepository.save(resumeMapping);
+            return Status.SUCCESS;
+        } else {
+            return Status.FAILURE;
+        }
     }
 
     @CrossOrigin()
