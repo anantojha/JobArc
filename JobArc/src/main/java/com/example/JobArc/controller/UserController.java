@@ -6,6 +6,7 @@ import com.example.JobArc.Repository.*;
 import com.example.JobArc.RequestModels.JobRequest;
 import com.example.JobArc.RequestModels.LoginRequest;
 import com.example.JobArc.RequestModels.ResumeRequest;
+import com.example.JobArc.RequestModels.ResumeUpdateRequest;
 import com.example.JobArc.ResponseModels.DashboardResponse;
 import com.example.JobArc.ResponseModels.LoginResponse;
 import com.example.JobArc.ResponseModels.ProfileResponse;
@@ -41,15 +42,15 @@ public class UserController {
         List<User> users = userRepository.findAll();
 
         for (User user : users) {
-            if (user.equals(newUser)) {
+            if (user.getUsername().equals(newUser.getUsername())) {
                 System.out.println("User Already exists!");
-                return new RegistrationResponse(Status.USER_ALREADY_EXISTS, -1, null);
+                return new RegistrationResponse(Status.USER_ALREADY_EXISTS.toString(), -1, null);
             }
         }
 
         newUser.setPassword(Base64.encodeBase64String(newUser.getPassword().getBytes()));
         User user = userRepository.save(newUser);
-        return new RegistrationResponse(Status.SUCCESS, user.getId(), user.getName());
+        return new RegistrationResponse(Status.SUCCESS.toString(), user.getId(), user.getName());
     }
 
     @CrossOrigin()
@@ -135,7 +136,23 @@ public class UserController {
         return null;
     }
 
-    // upload resume endpoint
+    @CrossOrigin()
+    @GetMapping("/users/resume")
+    public  Resume resumeDetails(@RequestParam long id) {
+        System.out.println("handle GET /resume");
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isPresent()){
+            User user = optionalUser.get();
+
+            Long resumeId =  resumeMappingRepository.findJobseekerResume(user.getId());
+            Resume resume = resumeRepository.getResumeFromId(resumeId);
+
+            return resume;
+        }
+        return null;
+    }
+
     @CrossOrigin()
     @PostMapping("/users/post_resume")
     public Status postResume(@Valid @RequestBody ResumeRequest newResume) {
@@ -156,9 +173,35 @@ public class UserController {
     }
 
     @CrossOrigin()
-    @DeleteMapping("/users/all")
-    public Status deleteUsers() {
-        userRepository.deleteAll();
-        return Status.SUCCESS;
+    @PostMapping("/users/update_resume")
+    public Status updateResume(@Valid @RequestBody Resume newResume) {
+        System.out.println("handle POST /update_resume");
+        Optional<Resume> optionalResume = resumeRepository.findById(newResume.getId());
+
+        if (optionalResume.isPresent()) {
+            Resume resume = optionalResume.get();
+            resume.setDescription(newResume.getDescription());
+            resume.setSkills(newResume.getSkills());
+            resume.setCertifications(newResume.getCertifications());
+            resume.setEducation_one(newResume.getEducation_one());
+            resume.setEducation_two(newResume.getEducation_two());
+            resume.setEducation_three(newResume.getEducation_three());
+            resume.setWork_one(newResume.getWork_one());
+            resume.setWork_two(newResume.getWork_two());
+            resume.setWork_three(newResume.getWork_three());
+            resumeRepository.save(resume);
+            return Status.SUCCESS;
+        } else {
+            return Status.FAILURE;
+        }
     }
+
+    /*
+        @CrossOrigin()
+        @DeleteMapping("/users/all")
+        public Status deleteUsers() {
+            userRepository.deleteAll();
+            return Status.SUCCESS;
+        }
+    */
 }

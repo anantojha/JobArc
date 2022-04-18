@@ -115,6 +115,10 @@ public class Resume {
         return work_three;
     }
 
+    public void setCreateDate(Timestamp ts){
+        createDate = ts;
+    }
+
     public void setWork_three(String work_three) {
         this.work_three = work_three;
     }
