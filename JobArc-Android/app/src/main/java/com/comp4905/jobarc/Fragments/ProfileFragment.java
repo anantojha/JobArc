@@ -6,11 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import com.comp4905.jobarc.Activity.LoginActivity;
+import com.comp4905.jobarc.Activity.UpdateResumeActivity;
 import com.comp4905.jobarc.Models.Profile;
 import com.comp4905.jobarc.Models.User;
 import com.comp4905.jobarc.R;
@@ -30,6 +32,7 @@ public class ProfileFragment extends Fragment {
     TextView username;
     TextView accounType;
     TextView userId;
+    Button updateResumeBtn;
 
 
 
@@ -48,6 +51,7 @@ public class ProfileFragment extends Fragment {
         username = view.findViewById(R.id.profileUsername);
         accounType = view.findViewById(R.id.profileAccountType);
         userId = view.findViewById(R.id.profileId);
+        updateResumeBtn = view.findViewById(R.id.updateProfileResumeBtn);
 
         getUserProfile(id);
 
@@ -77,6 +81,16 @@ public class ProfileFragment extends Fragment {
                     username.setText(profile.getUsername());
                     accounType.setText(profile.getAccountType());
                     userId.setText(String.valueOf(profile.getId()));
+
+                    if (profile.getAccountType().equals("jobseeker")){
+                        updateResumeBtn.setVisibility(View.VISIBLE);
+
+                        updateResumeBtn.setOnClickListener(view -> {
+                            Intent intent = new Intent(view.getContext(), UpdateResumeActivity.class);
+                            intent.putExtra("id", Long.valueOf(profile.getId()));
+                            startActivity(intent);
+                        });
+                    }
                 }
             }
 

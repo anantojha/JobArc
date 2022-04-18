@@ -3,19 +3,13 @@ package com.comp4905.jobarc.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.comp4905.jobarc.Models.JobPost;
-import com.comp4905.jobarc.Models.User;
 import com.comp4905.jobarc.R;
 import com.comp4905.jobarc.RetrofitClient;
-
 import java.io.IOException;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;

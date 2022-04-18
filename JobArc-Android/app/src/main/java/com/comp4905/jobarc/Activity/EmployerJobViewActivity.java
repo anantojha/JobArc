@@ -2,16 +2,15 @@ package com.comp4905.jobarc.Activity;
 
 import android.os.Bundle;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.comp4905.jobarc.Fragments.EmployerJobsFragment;
 import com.comp4905.jobarc.Fragments.ProfileFragment;
 import com.comp4905.jobarc.Fragments.SearchFragment;
 import com.comp4905.jobarc.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 public class EmployerJobViewActivity extends AppCompatActivity {
 

@@ -1,25 +1,18 @@
 package com.comp4905.jobarc.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import java.io.IOException;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 import com.comp4905.jobarc.Models.Login;
 import com.comp4905.jobarc.R;
 import com.comp4905.jobarc.RetrofitClient;
-import com.comp4905.jobarc.Models.User;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 

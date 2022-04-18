@@ -2,12 +2,9 @@ package com.comp4905.jobarc.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.comp4905.jobarc.R;
 
 public class PostResumeDescriptionActivity  extends AppCompatActivity {
@@ -48,7 +45,9 @@ public class PostResumeDescriptionActivity  extends AppCompatActivity {
             certificationsText = certifications.getText().toString();
 
             Intent intent = new Intent(PostResumeDescriptionActivity.this, PostResumeEducationActivity.class);
-            intent.putExtra("id", getIntent().getLongExtra("id", -1L));
+
+            long id = getIntent().getLongExtra("id", -1L);
+            intent.putExtra("id", id);
             intent.putExtra("description", descriptionText);
             intent.putExtra("skills", skillsText);
             intent.putExtra("certifications", certificationsText);

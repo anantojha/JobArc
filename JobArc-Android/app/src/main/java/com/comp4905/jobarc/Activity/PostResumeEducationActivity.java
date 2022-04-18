@@ -6,12 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.comp4905.jobarc.R;
-
-import java.util.Date;
 
 public class PostResumeEducationActivity extends AppCompatActivity {
 
@@ -38,9 +34,11 @@ public class PostResumeEducationActivity extends AppCompatActivity {
 
         educationTwoButton.setOnClickListener(view -> {
             if(educationTwoVisible){
+                educationTwoButton.setBackground(this.getDrawable(R.drawable.ic_baseline_plus_icon_24));
                 educationTwo.setVisibility(View.GONE);
                 educationTwoVisible = false;
             } else {
+                educationTwoButton.setBackground(this.getDrawable(R.drawable.ic_baseline_minus_icon_24));
                 educationTwo.setVisibility(View.VISIBLE);
                 educationTwoVisible = true;
             }
@@ -48,9 +46,11 @@ public class PostResumeEducationActivity extends AppCompatActivity {
 
         educationThreeButton.setOnClickListener(view -> {
             if(educationThreeVisible){
+                educationThreeButton.setBackground(this.getDrawable(R.drawable.ic_baseline_plus_icon_24));
                 educationThree.setVisibility(View.GONE);
                 educationThreeVisible = false;
             } else {
+                educationThreeButton.setBackground(this.getDrawable(R.drawable.ic_baseline_minus_icon_24));
                 educationThree.setVisibility(View.VISIBLE);
                 educationThreeVisible = true;
             }
@@ -169,7 +169,8 @@ public class PostResumeEducationActivity extends AppCompatActivity {
 
 
             Intent intent = new Intent(PostResumeEducationActivity.this, PostResumeWorkActivity.class);
-            intent.putExtra("id", getIntent().getLongExtra("id", -1L));
+            long id = getIntent().getLongExtra("id", -1L);
+            intent.putExtra("id", id);
             intent.putExtra("description", getIntent().getStringExtra("description"));
             intent.putExtra("skills", getIntent().getStringExtra("skills"));
             intent.putExtra("certifications", getIntent().getStringExtra("certifications"));

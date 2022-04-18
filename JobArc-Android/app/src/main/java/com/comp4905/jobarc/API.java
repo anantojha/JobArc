@@ -5,6 +5,7 @@ import com.comp4905.jobarc.Models.Login;
 import com.comp4905.jobarc.Models.ModelHome;
 import com.comp4905.jobarc.Models.Profile;
 import com.comp4905.jobarc.Models.RegistrationResponse;
+import com.comp4905.jobarc.Models.Resume;
 import com.comp4905.jobarc.Models.ResumePost;
 import com.comp4905.jobarc.Models.User;
 
@@ -43,4 +44,12 @@ public interface API {
 
     @GET("users/profile")
     Call<Profile> getProfile(@Query("id") long id);
+
+    @GET("users/resume")
+    Call<Resume> getResume(@Query("id") long id);
+
+    @POST("users/update_resume")
+    Call<ResponseBody> updateResume (
+            @Body Resume resumeUpdate
+    );
 }

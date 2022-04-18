@@ -1,20 +1,13 @@
 package com.comp4905.jobarc.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 import com.comp4905.jobarc.Models.RegistrationResponse;
 import com.comp4905.jobarc.R;
 import com.comp4905.jobarc.RetrofitClient;
@@ -83,10 +76,10 @@ public class RegisterActivity extends AppCompatActivity {
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                 RegistrationResponse res = response.body();
                 if (res != null){
-                    if (res.getStatus().equals("\"SUCCESS\"")) {
-                        Intent intent = new Intent();
-                        intent.putExtra("id", res.getId());
-                        startActivity(new Intent(RegisterActivity.this, PostResumeDescriptionActivity.class));
+                    if (res.getStatus().equals("SUCCESS")) {
+                        Intent intent = new Intent(RegisterActivity.this, PostResumeDescriptionActivity.class);
+                        intent.putExtra("id", Long.valueOf(res.getId()));
+                        startActivity(intent);
                     } else {
                         Toast.makeText(RegisterActivity.this, "User already exists!", Toast.LENGTH_LONG).show();
                     }
@@ -99,6 +92,5 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
     }
 }

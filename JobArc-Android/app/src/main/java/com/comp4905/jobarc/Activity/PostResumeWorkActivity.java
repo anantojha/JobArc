@@ -5,24 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.comp4905.jobarc.Models.RegistrationResponse;
 import com.comp4905.jobarc.Models.ResumePost;
-import com.comp4905.jobarc.Models.User;
 import com.comp4905.jobarc.R;
 import com.comp4905.jobarc.RetrofitClient;
-
+import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PostResumeWorkActivity extends AppCompatActivity {
-
 
     View workOne;
     View workTwo;
@@ -39,7 +33,7 @@ public class PostResumeWorkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_resume_work);
 
 
-        workOne = findViewById(R.id.workRowOne);
+        workOne = findViewById(R.id.resumeWorkEntryOne);
         workTwo = findViewById(R.id.workRowTwo);
         workTwoButton = findViewById(R.id.addWorkTwoBtn);
         workThree = findViewById(R.id.workRowThree);
@@ -48,9 +42,11 @@ public class PostResumeWorkActivity extends AppCompatActivity {
 
         workTwoButton.setOnClickListener(view -> {
             if(workTwoVisible){
+                workTwoButton.setBackground(this.getDrawable(R.drawable.ic_baseline_plus_icon_24));
                 workTwo.setVisibility(View.GONE);
                 workTwoVisible = false;
             } else {
+                workTwoButton.setBackground(this.getDrawable(R.drawable.ic_baseline_minus_icon_24));
                 workTwo.setVisibility(View.VISIBLE);
                 workTwoVisible = true;
             }
@@ -58,14 +54,15 @@ public class PostResumeWorkActivity extends AppCompatActivity {
 
         workThreeButton.setOnClickListener(view -> {
             if(workThreeVisible){
+                workThreeButton.setBackground(this.getDrawable(R.drawable.ic_baseline_plus_icon_24));
                 workThree.setVisibility(View.GONE);
                 workThreeVisible = false;
             } else {
+                workThreeButton.setBackground(this.getDrawable(R.drawable.ic_baseline_minus_icon_24));
                 workThree.setVisibility(View.VISIBLE);
                 workThreeVisible = true;
             }
         });
-
 
         submit.setOnClickListener(view -> {
 
@@ -188,10 +185,12 @@ public class PostResumeWorkActivity extends AppCompatActivity {
                         workThreeStartText + " to " + workThreeEndText + "\n\n" + workThreeResponsibilitiesText;
             }
 
+            long id = getIntent().getLongExtra("id", -1L);
+
             Call<ResponseBody> call = RetrofitClient
                     .getInstance()
                     .getAPI()
-                    .postResume(new ResumePost(getIntent().getLongExtra("id", -1L),
+                    .postResume(new ResumePost(id,
                             getIntent().getStringExtra("description"),
                             getIntent().getStringExtra("educationOne"),
                             getIntent().getStringExtra("educationTwo"),
@@ -206,14 +205,18 @@ public class PostResumeWorkActivity extends AppCompatActivity {
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    ResponseBody res = response.body();
-                    if (res != null){
-                        if (res.equals("\"SUCCESS\"")) {
-                             Toast.makeText(PostResumeWorkActivity.this, "Successfully registered. Please login", Toast.LENGTH_LONG).show();
-                             startActivity(new Intent(PostResumeWorkActivity.this, LoginActivity.class));
-                        } else {
-                            Toast.makeText(PostResumeWorkActivity.this, "Resume Upload Failed!", Toast.LENGTH_LONG).show();
-                        }
+                    String s = "";
+                    try {
+                        s = response.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (s.equals("\"SUCCESS\"")) {
+                         Toast.makeText(PostResumeWorkActivity.this, "Successfully registered. Please login", Toast.LENGTH_LONG).show();
+                         startActivity(new Intent(PostResumeWorkActivity.this, LoginActivity.class));
+                    } else {
+                        Toast.makeText(PostResumeWorkActivity.this, "Resume Upload Failed!", Toast.LENGTH_LONG).show();
                     }
                 }
 

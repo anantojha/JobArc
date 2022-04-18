@@ -1,10 +1,8 @@
 package com.comp4905.jobarc.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-
 import com.comp4905.jobarc.R;
 
 public class MainActivity extends AppCompatActivity {

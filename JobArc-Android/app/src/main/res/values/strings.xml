@@ -4,8 +4,8 @@
     <string-array name="EducationLevels">
         <item>High School Diploma</item>
         <item>College Diploma</item>
-        <item>Bachelor's Degree</item>
-        <item>Master's Degree</item>
+        <item>Bachelors Degree</item>
+        <item>Masters Degree</item>
         <item>Doctorate (PhD)</item>
     </string-array>
     <!-- Strings used for fragments for navigation -->

@@ -34,7 +34,7 @@
                     android:textSize="18dp" />
 
                 <include
-                    android:id="@+id/workRowOne"
+                    android:id="@+id/resumeWorkEntryOne"
                     layout="@layout/row_work" />
 
                 <LinearLayout

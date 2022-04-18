@@ -14,9 +14,9 @@ public class RegistrationResponse {
 
     @SerializedName("id")
     @Expose
-    private long id;
+    String id;
 
-    public RegistrationResponse(String status, long id, String name){
+    public RegistrationResponse(String status, String id, String name){
         this.status = status;
         this.id = id;
         this.name = name;
@@ -26,7 +26,7 @@ public class RegistrationResponse {
         return status;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

@@ -3,9 +3,7 @@ package com.comp4905.jobarc.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Bundle;
-
 import com.comp4905.jobarc.Fragments.EmployerHomeFragment;
 import com.comp4905.jobarc.Fragments.EmployerJobsFragment;
 import com.comp4905.jobarc.Fragments.ProfileFragment;
