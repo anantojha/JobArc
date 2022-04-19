@@ -15,7 +15,7 @@ public class EmployerDashboardActivity extends AppCompatActivity {
 
     private EmployerHomeFragment homeFragment;
     private EmployerJobsFragment jobsFragment;
-    private SearchFragment searchFragment = new SearchFragment();
+    private SearchFragment searchFragment;
     private ProfileFragment profileFragment;
 
     private BottomNavigationView bottomNavigationView;
@@ -31,7 +31,9 @@ public class EmployerDashboardActivity extends AppCompatActivity {
 
         homeFragment = new EmployerHomeFragment(id, username, accountType);
         jobsFragment = new EmployerJobsFragment(id, username, accountType);
+        searchFragment = new SearchFragment(id, username, accountType);
         profileFragment = new ProfileFragment(id);
+
 
         bottomNavigationView = findViewById(R.id.navMenuJobseeker);
         setFragment(homeFragment);

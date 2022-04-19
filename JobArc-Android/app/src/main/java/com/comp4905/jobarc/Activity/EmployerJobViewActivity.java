@@ -20,7 +20,7 @@ public class EmployerJobViewActivity extends AppCompatActivity {
     private String username;
     private String accountType;
     private EmployerJobsFragment jobsFragment;
-    private SearchFragment searchFragment = new SearchFragment();
+    private SearchFragment searchFragment;
     private ProfileFragment profileFragment;
 
     @Override
@@ -50,6 +50,7 @@ public class EmployerJobViewActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.navMenuJobseeker);
 
         jobsFragment = new EmployerJobsFragment(userId, username, accountType);
+        searchFragment = new SearchFragment(userId, username, accountType);
         profileFragment = new ProfileFragment(userId);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {

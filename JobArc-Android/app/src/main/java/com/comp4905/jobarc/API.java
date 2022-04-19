@@ -1,5 +1,6 @@
 package com.comp4905.jobarc;
 
+import com.comp4905.jobarc.Models.JobApplicationRequest;
 import com.comp4905.jobarc.Models.JobPost;
 import com.comp4905.jobarc.Models.Login;
 import com.comp4905.jobarc.Models.ModelHome;
@@ -52,4 +53,19 @@ public interface API {
     Call<ResponseBody> updateResume (
             @Body Resume resumeUpdate
     );
+
+    @POST("users/post_application")
+    Call<ResponseBody> applyToJob (
+            @Body JobApplicationRequest jobApplication
+    );
+
+//    @GET("users/applicants")
+//    Call<Profile> getApplicantsDetails(@Query("id") long id);
+
+    @GET("users/applicant_jobs")
+    Call<ModelHome> getApplicantJobs(@Query("id") long id);
+
+    @GET("users/search_jobs")
+    Call<ModelHome> getSearchJobs(@Query("keyword") String keyword);
+
 }

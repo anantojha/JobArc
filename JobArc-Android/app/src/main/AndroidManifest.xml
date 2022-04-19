@@ -13,6 +13,9 @@
         android:theme="@style/Theme.JobArcAndroid"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.ApplicationReviewActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.UpdateResumeActivity"
             android:exported="true" />
         <activity

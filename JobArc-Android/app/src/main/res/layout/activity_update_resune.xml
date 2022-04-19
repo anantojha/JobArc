@@ -34,7 +34,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
-                android:text="About You:"
+                android:text="Contact Information and About Me:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <EditText
@@ -46,7 +46,7 @@
                 android:layout_marginRight="30dp"
                 android:ems="10"
                 android:gravity="top"
-                android:hint="Enter a Description of your Qualifications"
+                android:hint="Enter your Contact Info. \n\n Add deatils about you..."
                 android:inputType="textMultiLine"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:textSize="16sp" />

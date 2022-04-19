@@ -40,9 +40,12 @@ public class Resume {
     @SerializedName("createDate")
     @Expose
     private Timestamp createDate;
+    @SerializedName("jobseeker_name")
+    @Expose
+    private String jobseekerName;
 
     public Resume(long resumeId, String description, String educationOne, String educationTwo, String educationThree,
-                  String workOne, String workTwo, String workThree, String skills, String certifications, Timestamp createDate) {
+                  String workOne, String workTwo, String workThree, String skills, String certifications, Timestamp createDate, String jobseekerName) {
         this.resumeId = resumeId;
         this.description = description;
         this.educationOne = educationOne;
@@ -54,6 +57,7 @@ public class Resume {
         this.skills = skills;
         this.certifications = certifications;
         this.createDate = createDate;
+        this.jobseekerName = jobseekerName;
     }
 
     public long getResumeId() {
@@ -139,5 +143,13 @@ public class Resume {
 
     public String getCertifications() {
         return certifications;
+    }
+
+    public String getJobseekerName() {
+        return jobseekerName;
+    }
+
+    public void setJobseekerName(String jobseekerName) {
+        this.jobseekerName = jobseekerName;
     }
 }

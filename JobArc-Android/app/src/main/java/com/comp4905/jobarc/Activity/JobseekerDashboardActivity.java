@@ -16,7 +16,7 @@ public class JobseekerDashboardActivity extends AppCompatActivity {
 
     private JobSeekerHomeFragment homeFragment;
     private JobSeekerJobsFragment jobsFragment;
-    private SearchFragment searchFragment = new SearchFragment();
+    private SearchFragment searchFragment;
     private ProfileFragment profileFragment;
 
     private BottomNavigationView bottomNavigationView;
@@ -32,6 +32,7 @@ public class JobseekerDashboardActivity extends AppCompatActivity {
 
         homeFragment = new JobSeekerHomeFragment(id, username, accountType);
         jobsFragment = new JobSeekerJobsFragment(id, username, accountType);
+        searchFragment = new SearchFragment(id, username, accountType);
         profileFragment = new ProfileFragment(id);
 
         bottomNavigationView = findViewById(R.id.navMenuJobseeker);
