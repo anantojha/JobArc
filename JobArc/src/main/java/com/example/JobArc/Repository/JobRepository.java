@@ -17,5 +17,8 @@ public interface JobRepository extends JpaRepository<Job, Long> {
 
     @Query("SELECT j FROM Job j ORDER BY j.createDate desc")
     List<Job> findRecentJobs();
-    
+
+    @Query("SELECT id FROM Job where description like %:keyword% " +
+            "or title like %:keyword% or employerName like %:keyword% or location like %:keyword%")
+    List<Long> searchForKeywordInJobs(String keyword);
 }

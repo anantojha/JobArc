@@ -3,21 +3,16 @@ package com.example.JobArc.controller;
 import com.example.JobArc.Entity.*;
 import com.example.JobArc.Enums.AccountType;
 import com.example.JobArc.Repository.*;
-import com.example.JobArc.RequestModels.JobRequest;
-import com.example.JobArc.RequestModels.LoginRequest;
-import com.example.JobArc.RequestModels.ResumeRequest;
-import com.example.JobArc.RequestModels.ResumeUpdateRequest;
-import com.example.JobArc.ResponseModels.DashboardResponse;
-import com.example.JobArc.ResponseModels.LoginResponse;
-import com.example.JobArc.ResponseModels.ProfileResponse;
+import com.example.JobArc.RequestModels.*;
+import com.example.JobArc.ResponseModels.*;
 import com.example.JobArc.Enums.Status;
-import com.example.JobArc.ResponseModels.RegistrationResponse;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +29,8 @@ public class UserController {
     ResumeRepository resumeRepository;
     @Autowired
     ResumeMappingRepository resumeMappingRepository;
+    @Autowired
+    JobApplicationRepository jobApplicationRepository;
 
     @CrossOrigin()
     @PostMapping("/users/register")
@@ -196,12 +193,79 @@ public class UserController {
         }
     }
 
-    /*
-        @CrossOrigin()
-        @DeleteMapping("/users/all")
-        public Status deleteUsers() {
-            userRepository.deleteAll();
-            return Status.SUCCESS;
+
+    @CrossOrigin()
+    @PostMapping("/users/post_application")
+    public Status postApplication(@Valid @RequestBody JobApplicationRequest applicationRequest) {
+        System.out.println("handle POST /post_application");
+
+
+        Optional<User> optionalUser = userRepository.findById(applicationRequest.getJobseekerId());
+        Optional<Job> optionalJob = jobRepository.findById(applicationRequest.getJobId());
+
+        if (optionalUser.isPresent() && optionalJob.isPresent()) {
+            User jobseeker = optionalUser.get();
+            Job job = optionalJob.get();
+
+            List<Long> found = jobApplicationRepository.ckeckIfApplicationExists(
+                    applicationRequest.getJobseekerId(), applicationRequest.getJobId());
+
+            if(found.isEmpty()){
+                jobApplicationRepository.save(new JobApplication(jobseeker.getId(), job.getId()));
+                return Status.SUCCESS;
+            } else {
+                return Status.FAILURE;
+            }
+        } else {
+            return Status.FAILURE;
         }
-    */
+    }
+
+    // get all applicant resumes for a job
+    @CrossOrigin()
+    @GetMapping("/users/applicants")
+    public JobApplicantsResponse applicantsDetails(@RequestParam long id) {
+        Optional<Job> optionalJob = jobRepository.findById(id);
+
+        if(optionalJob.isPresent()){
+            Job job = optionalJob.get();
+            List<Long> jobseekerIds = jobApplicationRepository.findAllApplicants(job.getId());
+            List<Long> resumeIds = resumeMappingRepository.findAllResumes(jobseekerIds);
+            List<Resume> resumes = resumeRepository.findAllById(resumeIds);
+            return new JobApplicantsResponse(resumes);
+        }
+        return null;
+    }
+
+
+    // get all jobs applied to
+    @CrossOrigin()
+    @GetMapping("/users/applicant_jobs")
+    public ApplicantJobsResponse applicantJobDetails(@RequestParam long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            List<Long> jobIds = jobApplicationRepository.findAllApplicantJobs(user.getId());
+            List<Job> jobs = jobRepository.findAllById(jobIds);
+            return new ApplicantJobsResponse(jobs);
+        }
+        return null;
+    }
+
+
+    // get all jobs applied to
+    @CrossOrigin()
+    @GetMapping("/users/search_jobs")
+    public ApplicantJobsResponse searchJobDetails(@RequestParam String keyword) {
+
+        List<Long> jobIds = jobRepository.searchForKeywordInJobs(keyword);
+
+        if (!jobIds.isEmpty()) {
+            List<Job> jobs = jobRepository.findAllById(jobIds);
+            return new ApplicantJobsResponse(jobs);
+        }
+        return new ApplicantJobsResponse(new ArrayList<>());
+    }
+
 }
