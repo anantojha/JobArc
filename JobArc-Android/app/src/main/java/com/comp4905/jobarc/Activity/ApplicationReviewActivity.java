@@ -2,6 +2,7 @@ package com.comp4905.jobarc.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +50,13 @@ public class ApplicationReviewActivity extends AppCompatActivity {
         jobId = getIntent().getLongExtra("jobId", -1L);
         username = getIntent().getStringExtra("username");
         accountType = getIntent().getStringExtra("accountType");
+
+        if(accountType.equals("employer"))
+        {
+            submitBtn.setVisibility(View.GONE);
+        }
+
+
 
         name = findViewById(R.id.applicantNameReviewLabel);
         summary = findViewById(R.id.resumeSummaryReviewLabel);

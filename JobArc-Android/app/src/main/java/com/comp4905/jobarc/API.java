@@ -1,5 +1,6 @@
 package com.comp4905.jobarc;
 
+import com.comp4905.jobarc.Models.ApplicantsModel;
 import com.comp4905.jobarc.Models.JobApplicationRequest;
 import com.comp4905.jobarc.Models.JobPost;
 import com.comp4905.jobarc.Models.Login;
@@ -59,8 +60,8 @@ public interface API {
             @Body JobApplicationRequest jobApplication
     );
 
-//    @GET("users/applicants")
-//    Call<Profile> getApplicantsDetails(@Query("id") long id);
+    @GET("users/applicants")
+    Call<ApplicantsModel> getApplicantsDetails(@Query("id") long id);
 
     @GET("users/applicant_jobs")
     Call<ModelHome> getApplicantJobs(@Query("id") long id);

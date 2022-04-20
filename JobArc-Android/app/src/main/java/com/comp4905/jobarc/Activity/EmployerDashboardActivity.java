@@ -29,14 +29,14 @@ public class EmployerDashboardActivity extends AppCompatActivity {
         long id = getIntent().getLongExtra("id", -1L);
         String accountType = getIntent().getStringExtra("accountType");
 
-        homeFragment = new EmployerHomeFragment(id, username, accountType);
+
         jobsFragment = new EmployerJobsFragment(id, username, accountType);
         searchFragment = new SearchFragment(id, username, accountType);
         profileFragment = new ProfileFragment(id);
 
 
         bottomNavigationView = findViewById(R.id.navMenuJobseeker);
-        setFragment(homeFragment);
+        setFragment(new EmployerHomeFragment(id, username, accountType));
         bottomNavigationView.setSelectedItemId(R.id.menuHome);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {

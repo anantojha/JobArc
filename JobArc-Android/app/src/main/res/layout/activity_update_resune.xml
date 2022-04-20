@@ -42,12 +42,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/border"
                 android:ems="10"
                 android:gravity="top"
-                android:hint="Enter your Contact Info. \n\n Add deatils about you..."
+                android:hint="Enter your Contact Info. \n\nAdd deatils about you..."
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:textSize="16sp" />
 
@@ -67,12 +68,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/border"
                 android:ems="10"
                 android:gravity="top"
                 android:hint="Enter Skills separated by commas "
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:textSize="16sp" />
 
@@ -92,12 +94,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/border"
                 android:ems="10"
                 android:gravity="top"
                 android:hint="Enter Certifications separated by commas  (optional)"
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:textSize="16sp" />
 
@@ -117,12 +120,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/border"
                 android:ems="10"
                 android:gravity="top"
                 android:hint="Enter education #1"
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:textSize="16sp" />
 
@@ -141,12 +145,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/border"
                 android:ems="10"
                 android:gravity="top"
                 android:hint="Enter education #2 (optional)"
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:textSize="16sp" />
 
@@ -165,12 +170,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/border"
                 android:ems="10"
                 android:gravity="top"
                 android:hint="Enter education #3  (optional)"
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:textSize="16sp" />
 
@@ -190,12 +196,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/border"
                 android:ems="10"
                 android:gravity="top"
                 android:hint="Enter work experience #1"
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:textSize="16sp" />
 
@@ -214,12 +221,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/border"
                 android:ems="10"
                 android:gravity="top"
                 android:hint="Enter work experience #2  (optional)"
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:textSize="16sp" />
 
@@ -238,14 +246,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="30dp"
                 android:ems="10"
                 android:gravity="top"
                 android:hint="Enter work experience #3 (optional)"
                 android:inputType="textMultiLine"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:background="@drawable/border"
+                android:padding="10dp" />
 
             <Button
                 android:id="@+id/resumeUpdateBtn"

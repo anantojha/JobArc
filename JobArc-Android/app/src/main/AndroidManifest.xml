@@ -13,6 +13,12 @@
         android:theme="@style/Theme.JobArcAndroid"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.ApplicantViewActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.ViewJobApplicantsActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.ApplicationReviewActivity"
             android:exported="true" />
         <activity
