@@ -59,6 +59,14 @@ public class Resume {
         return id;
     }
 
+    public String getJobseeker_name() {
+        return jobseeker_name;
+    }
+
+    public void setJobseeker_name(String jobseeker_name) {
+        this.jobseeker_name = jobseeker_name;
+    }
+
     public Timestamp getCreateDate() {
         return createDate;
     }

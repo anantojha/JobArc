@@ -9,12 +9,12 @@ import java.util.List;
 
 public interface JobApplicationRepository extends JpaRepository<JobApplication, Long> {
 
-    @Query("SELECT jobseekerId FROM JobApplication WHERE jobId = jobId")
-    List<Long> findAllApplicants(@Param("jobId") Long jobId);
+    @Query("SELECT jobseekerId FROM JobApplication WHERE jobId = :idJob")
+    List<Long> findAllApplicants(@Param("idJob") Long idJob);
 
-    @Query("SELECT id FROM JobApplication WHERE jobseekerId = jobseekerId and jobId = jobId")
-    List<Long> ckeckIfApplicationExists(@Param("jobseekerId") Long jobseekerId, @Param("jobId") Long jobId);
+    @Query("SELECT j.id FROM JobApplication j WHERE j.jobseekerId = :idJobseeker and j.jobId = :idJob")
+    List<Long> ckeckIfApplicationExists(@Param("idJobseeker") Long idJobseeker, @Param("idJob") Long idJob);
 
-    @Query("SELECT jobId FROM JobApplication WHERE jobseekerId = jobseekerId")
-    List<Long> findAllApplicantJobs(@Param("jobseekerId") Long jobseekerId);
+    @Query("SELECT jobId FROM JobApplication WHERE jobseekerId = :idJobseeker")
+    List<Long> findAllApplicantJobs(@Param("idJobseeker") Long idJobseeker);
 }

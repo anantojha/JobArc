@@ -12,8 +12,8 @@ import java.util.List;
 @Repository
 public interface ResumeMappingRepository extends JpaRepository<ResumeMapping, Long>{
 
-    @Query("SELECT resumeId FROM ResumeMapping WHERE jobseekerId = id")
-    Long findJobseekerResume(@Param("id") Long id);
+    @Query("SELECT resumeId FROM ResumeMapping WHERE jobseekerId = :id")
+    Long findJobseekerResume(@Param("id") Long jobseekerId);
 
     @Query("SELECT resumeId FROM ResumeMapping  WHERE jobseekerId IN :ids")
     List<Long> findAllResumes(@Param("ids") Collection<Long> idList);
