@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
+
+import com.comp4905.jobarc.Fragments.EmployerHomeFragment;
 import com.comp4905.jobarc.Fragments.JobSeekerHomeFragment;
 import com.comp4905.jobarc.Fragments.JobSeekerJobsFragment;
 import com.comp4905.jobarc.Fragments.ProfileFragment;
@@ -36,7 +38,7 @@ public class JobseekerDashboardActivity extends AppCompatActivity {
         profileFragment = new ProfileFragment(id);
 
         bottomNavigationView = findViewById(R.id.navMenuJobseeker);
-        setFragment(homeFragment);
+        setFragment(jobsFragment);
         bottomNavigationView.setSelectedItemId(R.id.menuHome);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -45,7 +47,7 @@ public class JobseekerDashboardActivity extends AppCompatActivity {
             } else {
                 switch (item.getItemId()) {
                     case R.id.menuJobs:
-                        setFragment(jobsFragment);
+                        setFragment(homeFragment);
                         return true;
                     case R.id.menuSearch:
                         setFragment(searchFragment);
@@ -54,7 +56,8 @@ public class JobseekerDashboardActivity extends AppCompatActivity {
                         setFragment(profileFragment);
                         return true;
                     default:
-                        setFragment(homeFragment);
+                        setFragment(jobsFragment);
+                        setFragment(new JobSeekerJobsFragment(id, username, accountType));
                         return true;
                 }
             }

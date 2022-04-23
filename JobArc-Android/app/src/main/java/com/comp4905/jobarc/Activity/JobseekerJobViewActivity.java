@@ -81,14 +81,11 @@ public class JobseekerJobViewActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.menuJobs:
                     finish();
-                    //setFragment(jobsFragment);
                 case R.id.menuSearch:
                     finish();
-                    //setFragment(searchFragment);
                     return true;
                 case R.id.menuProfile:
                     finish();
-                    //setFragment(profileFragment);
                     return true;
                 case R.id.menuHome:
                     finish();
