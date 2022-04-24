@@ -8,17 +8,20 @@ import com.example.JobArc.ResponseModels.LoginResponse;
 import com.example.JobArc.ResponseModels.ProfileResponse;
 import com.example.JobArc.ResponseModels.RegistrationResponse;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
 @Component
-public class UserService implements IUserService {
+public class UserService implements IUserService{
 
+    @Autowired
+    UserRepository userRepository;
 
     @Override
-    public RegistrationResponse registerUser(UserRepository userRepository, User newUser){
+    public RegistrationResponse registerUser(User newUser){
 
         List<User> users = userRepository.findAll();
 
@@ -36,7 +39,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public LoginResponse loginUser(UserRepository userRepository, LoginRequest request){
+    public LoginResponse loginUser(LoginRequest request){
         List<User> users = userRepository.findAll();
 
         for (User user : users) {
@@ -53,7 +56,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getUserById(UserRepository userRepository, long id){
+    public User getUserById(long id){
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isPresent()){
@@ -65,7 +68,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public ProfileResponse getUserProfile(UserRepository userRepository, long id){
+    public ProfileResponse getUserProfile(long id){
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isPresent()){

@@ -15,15 +15,15 @@ import java.util.List;
 @Service
 public interface IJobsService {
 
-    DashboardResponse getEmployerDashboard(JobRepository jobRepository, JobMappingRepository jobMappingRepository, User user);
+    DashboardResponse getEmployerDashboard(User user);
 
-    DashboardResponse getJobseekerDashboard(JobRepository jobRepository, JobMappingRepository jobMappingRepository);
+    DashboardResponse getJobseekerDashboard();
 
-    Status createNewJob(JobRepository jobRepository, JobMappingRepository jobMappingRepository, User employer, JobRequest newJob);
+    Status createNewJob(User employer, JobRequest newJob);
 
-    Job getJobById(JobRepository jobRepository, JobMappingRepository jobMappingRepository, long id);
+    Job getJobById(long id);
 
-    ApplicantJobsResponse getJobsByIds(JobRepository jobRepository, JobMappingRepository jobMappingRepository, List<Long> jobIds);
+    ApplicantJobsResponse getJobsByIds(List<Long> jobIds);
 
-    ApplicantJobsResponse searchJobs(JobRepository jobRepository, JobMappingRepository jobMappingRepository, String keyword);
+    ApplicantJobsResponse searchJobs(String keyword);
 }

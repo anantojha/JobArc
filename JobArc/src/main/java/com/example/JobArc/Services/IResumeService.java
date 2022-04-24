@@ -14,11 +14,11 @@ import java.util.List;
 @Service
 public interface IResumeService {
 
-    Resume getResumeByUserId(ResumeRepository resumeRepository, ResumeMappingRepository resumeMappingRepository, long id);
+    Resume getResumeByUserId(long id);
 
-    Status createNewResume(ResumeRepository resumeRepository, ResumeMappingRepository resumeMappingRepository, User jobseeker, ResumeRequest newResume);
+    Status createNewResume(User jobseeker, ResumeRequest newResume);
 
-    Status updateResume(ResumeRepository resumeRepository, ResumeMappingRepository resumeMappingRepository, Resume newResume);
+    Status updateResume(Resume newResume);
 
-    JobApplicantsResponse getResumesFromUserIds(ResumeRepository resumeRepository, ResumeMappingRepository resumeMappingRepository, List<Long> jobseekerIds);
+    JobApplicantsResponse getResumesFromUserIds(List<Long> jobseekerIds);
 }

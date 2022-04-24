@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 @Service
 public interface IUserService {
 
-    RegistrationResponse registerUser(UserRepository userRepository, User newUser);
+    RegistrationResponse registerUser(User newUser);
 
-    LoginResponse loginUser(UserRepository userRepository, LoginRequest request);
+    LoginResponse loginUser(LoginRequest request);
 
-    User getUserById(UserRepository userRepository, long id);
+    User getUserById(long id);
 
-    ProfileResponse getUserProfile(UserRepository userRepository, long id);
+    ProfileResponse getUserProfile(long id);
 
 
 }

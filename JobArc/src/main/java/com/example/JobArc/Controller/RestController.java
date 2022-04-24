@@ -9,6 +9,7 @@ import com.example.JobArc.Enums.Status;
 import com.example.JobArc.Services.*;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,142 +19,128 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-@RestController
-public class UserController {
+@org.springframework.web.bind.annotation.RestController
+public class RestController {
 
     @Autowired
-    JobRepository jobRepository;
-
+    IUserService userService;
     @Autowired
-    JobMappingRepository jobMappingRepository;
-
+    IJobsService jobsService;
     @Autowired
-    JobApplicationRepository jobApplicationRepository;
-
+    IResumeService resumeService;
     @Autowired
-    ResumeRepository resumeRepository;
-
-    @Autowired
-    ResumeMappingRepository resumeMappingRepository;
-
-    @Autowired
-    UserRepository userRepository;
-
-    IUserService userService = new UserService();
-    IJobsService jobsService = new JobsService();
-    IResumeService resumeService = new ResumeService();
-    IJobApplicationService jobApplicationService = new JobApplicationService();
+    IJobApplicationService jobApplicationService;
 
     @CrossOrigin()
-    @PostMapping("/users/register")
+    @PostMapping("/jobarc/register")
     public RegistrationResponse registerUser(@Valid @RequestBody User newUser) {
         System.out.println("handle POST /register");
-        return userService.registerUser(userRepository, newUser);
+        return userService.registerUser(newUser);
     }
 
 
     @CrossOrigin()
-    @PostMapping("/users/login")
+    @PostMapping("/jobarc/login")
     public LoginResponse loginUser(@Valid @RequestBody LoginRequest request) {
         System.out.println("handle POST /login");
-        return userService.loginUser(userRepository, request);
+        return userService.loginUser(request);
     }
 
 
     @CrossOrigin()
-    @GetMapping("/users/dashboard")
+    @GetMapping("/jobarc/dashboard")
     public DashboardResponse dashboardDetails(@RequestParam long id) {
         System.out.println("handle GET /dashboard");
 
-        User user = userService.getUserById(userRepository, id);
+        User user = userService.getUserById(id);
 
         if (user.getAccountType().equals(AccountType.employer.toString())) {
-            return jobsService.getEmployerDashboard(jobRepository, jobMappingRepository, user);
+            return jobsService.getEmployerDashboard(user);
         } else {
-            return jobsService.getJobseekerDashboard(jobRepository, jobMappingRepository);
+            return jobsService.getJobseekerDashboard();
         }
     }
 
 
     @CrossOrigin()
-    @GetMapping("/users/profile")
+    @GetMapping("/jobarc/profile")
     public ProfileResponse profileDetails(@RequestParam long id) {
         System.out.println("handle GET /profile");
-        return userService.getUserProfile(userRepository, id);
+        return userService.getUserProfile(id);
     }
 
 
     @CrossOrigin()
-    @PostMapping("/users/post_job")
+    @PostMapping("/jobarc/post_job")
     public Status postJob(@Valid @RequestBody JobRequest newJob) {
         System.out.println("handle POST /post_job");
 
-        User user = userService.getUserById(userRepository, newJob.getEmployerId());
+        User user = userService.getUserById(newJob.getEmployerId());
 
         if(user == null) {
             return Status.FAILURE;
         } else {
-            return jobsService.createNewJob(jobRepository, jobMappingRepository, user, newJob);
+            return jobsService.createNewJob(user, newJob);
         }
     }
 
 
     @CrossOrigin()
-    @GetMapping("/users/job")
+    @GetMapping("/jobarc/job")
     public Job jobDetails(@RequestParam long id) {
         System.out.println("handle GET /job");
-        return jobsService.getJobById(jobRepository, jobMappingRepository, id);
+        return jobsService.getJobById(id);
     }
 
 
     @CrossOrigin()
-    @GetMapping("/users/resume")
+    @GetMapping("/jobarc/resume")
     public  Resume resumeDetails(@RequestParam long id) {
         System.out.println("handle GET /resume");
 
-        User user = userService.getUserById(userRepository, id);
+        User user = userService.getUserById(id);
 
         if(user == null){
             return null;
         } else {
-            return resumeService.getResumeByUserId(resumeRepository, resumeMappingRepository, user.getId());
+            return resumeService.getResumeByUserId(user.getId());
         }
     }
 
 
     @CrossOrigin()
-    @PostMapping("/users/post_resume")
+    @PostMapping("/jobarc/post_resume")
     public Status postResume(@Valid @RequestBody ResumeRequest newResume) {
         System.out.println("handle POST /post_resume");
 
-        User user = userService.getUserById(userRepository, newResume.getJobseekerId());
+        User user = userService.getUserById(newResume.getJobseekerId());
 
         if(user == null){
             return Status.FAILURE;
         } else {
-            return resumeService.createNewResume(resumeRepository, resumeMappingRepository, user, newResume);
+            return resumeService.createNewResume(user, newResume);
         }
     }
 
 
     @CrossOrigin()
-    @PostMapping("/users/update_resume")
+    @PostMapping("/jobarc/update_resume")
     public Status updateResume(@Valid @RequestBody Resume newResume) {
         System.out.println("handle POST /update_resume");
-        return resumeService.updateResume(resumeRepository, resumeMappingRepository, newResume);
+        return resumeService.updateResume(newResume);
     }
 
 
     @CrossOrigin()
-    @PostMapping("/users/post_application")
+    @PostMapping("/jobarc/post_application")
     public Status postApplication(@Valid @RequestBody JobApplicationRequest applicationRequest) {
         System.out.println("handle POST /post_application");
 
-        User user = userService.getUserById(userRepository, applicationRequest.getJobseekerId());
-        Job job = jobsService.getJobById(jobRepository, jobMappingRepository, applicationRequest.getJobId());
+        User user = userService.getUserById(applicationRequest.getJobseekerId());
+        Job job = jobsService.getJobById(applicationRequest.getJobId());
 
         if(user != null && job != null){
-            return jobApplicationService.createNewJobApplication(jobApplicationRepository, user.getId(), job.getId());
+            return jobApplicationService.createNewJobApplication(user.getId(), job.getId());
         } else {
             return Status.FAILURE;
         }
@@ -161,41 +148,41 @@ public class UserController {
 
 
     @CrossOrigin()
-    @GetMapping("/users/applicants")
+    @GetMapping("/jobarc/applicants")
     public JobApplicantsResponse applicantsDetails(@RequestParam long id) {
         System.out.println("handle GET /applicants");
 
-        Job job = jobsService.getJobById(jobRepository, jobMappingRepository, id);
+        Job job = jobsService.getJobById(id);
 
         if(job == null){
             return null;
         } else {
-            return resumeService.getResumesFromUserIds(resumeRepository, resumeMappingRepository, jobApplicationService.getApplicantIds(jobApplicationRepository, job.getId()));
+            return resumeService.getResumesFromUserIds(jobApplicationService.getApplicantIds(job.getId()));
         }
     }
 
 
     @CrossOrigin()
-    @GetMapping("/users/applicant_jobs")
+    @GetMapping("/jobarc/applicant_jobs")
     public ApplicantJobsResponse applicantJobDetails(@RequestParam long id) {
         System.out.println("handle GET /applicant_jobs");
 
-        User user = userService.getUserById(userRepository, id);
+        User user = userService.getUserById(id);
 
         if(user == null){
             return null;
         } else {
-            return jobsService.getJobsByIds(jobRepository, jobMappingRepository, jobApplicationService.getApplicantJobIds(jobApplicationRepository, user.getId()));
+            return jobsService.getJobsByIds( jobApplicationService.getApplicantJobIds(user.getId()));
         }
     }
 
 
     @CrossOrigin()
-    @GetMapping("/users/search_jobs")
+    @GetMapping("/jobarc/search_jobs")
     public ApplicantJobsResponse searchJobDetails(@RequestParam String keyword) {
         System.out.println("handle GET /search_jobs");
 
-        return jobsService.searchJobs(jobRepository, jobMappingRepository, keyword);
+        return jobsService.searchJobs(keyword);
     }
 
 }

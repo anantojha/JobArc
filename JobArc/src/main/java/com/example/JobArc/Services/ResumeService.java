@@ -8,22 +8,29 @@ import com.example.JobArc.Repository.ResumeMappingRepository;
 import com.example.JobArc.Repository.ResumeRepository;
 import com.example.JobArc.RequestModels.ResumeRequest;
 import com.example.JobArc.ResponseModels.JobApplicantsResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ResumeService implements IResumeService{
+public class ResumeService implements IResumeService {
+
+    @Autowired
+    ResumeRepository resumeRepository;
+
+    @Autowired
+    ResumeMappingRepository resumeMappingRepository;
 
     @Override
-    public Resume getResumeByUserId(ResumeRepository resumeRepository, ResumeMappingRepository resumeMappingRepository, long id) {
+    public Resume getResumeByUserId(long id) {
         Long resumeId =  resumeMappingRepository.findJobseekerResume(id);
         return resumeRepository.getResumeFromId(resumeId);
     }
 
     @Override
-    public Status updateResume(ResumeRepository resumeRepository, ResumeMappingRepository resumeMappingRepository, Resume newResume) {
+    public Status updateResume(Resume newResume) {
         Optional<Resume> optionalResume = resumeRepository.findById(newResume.getId());
 
         if (optionalResume.isPresent()) {
@@ -45,7 +52,7 @@ public class ResumeService implements IResumeService{
     }
 
     @Override
-    public Status createNewResume(ResumeRepository resumeRepository, ResumeMappingRepository resumeMappingRepository, User jobseeker, ResumeRequest newResume){
+    public Status createNewResume(User jobseeker, ResumeRequest newResume){
         Resume created = resumeRepository.save(new Resume(jobseeker.getName(),
                 newResume.getDescription(), newResume.getEducationOne(), newResume.getEducationTwo(), newResume.getEducationThree(),
                 newResume.getWorkOne(), newResume.getWorkTwo(), newResume.getWorkThree(), newResume.getSkills(), newResume.getCertifications()));
@@ -55,7 +62,7 @@ public class ResumeService implements IResumeService{
     }
 
     @Override
-    public JobApplicantsResponse getResumesFromUserIds(ResumeRepository resumeRepository, ResumeMappingRepository resumeMappingRepository, List<Long> jobseekerIds){
+    public JobApplicantsResponse getResumesFromUserIds(List<Long> jobseekerIds){
         List<Long> resumeIds = resumeMappingRepository.findAllResumes(jobseekerIds);
         List<Resume> resumes = resumeRepository.findAllById(resumeIds);
         return new JobApplicantsResponse(resumes);
