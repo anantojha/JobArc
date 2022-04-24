@@ -14,59 +14,46 @@ import com.comp4905.jobarc.Models.User;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface API {
-    @POST("users/register")
-    Call<RegistrationResponse> createUser (
-            @Body User user
-    );
+    @POST("jobarc/register")
+    Call<RegistrationResponse> createUser ( @Body User user );
 
-    @POST("users/login")
-    Call<ResponseBody> checkUser (
-            @Body Login user
-    );
+    @POST("jobarc/login")
+    Call<ResponseBody> checkUser ( @Body Login user );
 
-    @GET("users/dashboard")
+    @GET("jobarc/dashboard")
     Call<ModelHome> getDashboard(@Query("id") long id);
 
-    @POST("users/post_job")
-    Call<ResponseBody> postJob (
-            @Body JobPost jobPost
-    );
+    @POST("jobarc/post_job")
+    Call<ResponseBody> postJob ( @Body JobPost jobPost );
 
-    @POST("users/post_resume")
-    Call<ResponseBody> postResume (
-            @Body ResumePost resumePost
-    );
+    @POST("jobarc/post_resume")
+    Call<ResponseBody> postResume ( @Body ResumePost resumePost );
 
-    @GET("users/profile")
+    @GET("jobarc/profile")
     Call<Profile> getProfile(@Query("id") long id);
 
-    @GET("users/resume")
+    @GET("jobarc/resume")
     Call<Resume> getResume(@Query("id") long id);
 
-    @POST("users/update_resume")
-    Call<ResponseBody> updateResume (
-            @Body Resume resumeUpdate
-    );
+    @POST("jobarc/update_resume")
+    Call<ResponseBody> updateResume ( @Body Resume resumeUpdate );
 
-    @POST("users/post_application")
-    Call<ResponseBody> applyToJob (
-            @Body JobApplicationRequest jobApplication
-    );
+    @POST("jobarc/post_application")
+    Call<ResponseBody> applyToJob ( @Body JobApplicationRequest jobApplication );
 
-    @GET("users/applicants")
+    @GET("jobarc/applicants")
     Call<ApplicantsModel> getApplicantsDetails(@Query("id") long id);
 
-    @GET("users/applicant_jobs")
+    @GET("jobarc/applicant_jobs")
     Call<ModelHome> getApplicantJobs(@Query("id") long id);
 
-    @GET("users/search_jobs")
+    @GET("jobarc/search_jobs")
     Call<ModelHome> getSearchJobs(@Query("keyword") String keyword);
 
 }

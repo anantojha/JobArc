@@ -77,9 +77,14 @@ public class RegisterActivity extends AppCompatActivity {
                 RegistrationResponse res = response.body();
                 if (res != null){
                     if (res.getStatus().equals("SUCCESS")) {
-                        Intent intent = new Intent(RegisterActivity.this, PostResumeDescriptionActivity.class);
-                        intent.putExtra("id", Long.valueOf(res.getId()));
-                        startActivity(intent);
+                        if(accountType.equals("jobseeker")) {
+                            Intent intent = new Intent(RegisterActivity.this, PostResumeDescriptionActivity.class);
+                            intent.putExtra("id", Long.valueOf(res.getId()));
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Registration Complete!", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        }
                     } else {
                         Toast.makeText(RegisterActivity.this, "User already exists!", Toast.LENGTH_LONG).show();
                     }

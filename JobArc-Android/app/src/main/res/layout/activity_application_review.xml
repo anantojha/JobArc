@@ -68,6 +68,7 @@
 
             <TextView
                 android:id="@+id/resumeSummaryReviewLabel"
+                android:scrollbars="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginStart="30dp"
@@ -90,6 +91,7 @@
             <TextView
                 android:id="@+id/resumeSkillsReviewLabel"
                 android:layout_width="match_parent"
+                android:scrollbars="vertical"
                 android:layout_height="80dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
@@ -111,6 +113,7 @@
             <TextView
                 android:id="@+id/resumeCertificationsReviewLabel"
                 android:layout_width="match_parent"
+                android:scrollbars="vertical"
                 android:layout_height="80dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
@@ -132,6 +135,7 @@
             <TextView
                 android:id="@+id/resumeEducationOneReviewLabel"
                 android:layout_width="match_parent"
+                android:scrollbars="vertical"
                 android:layout_height="200dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
@@ -153,6 +157,7 @@
             <TextView
                 android:id="@+id/resumeEducationTwoReviewLabel"
                 android:layout_width="match_parent"
+                android:scrollbars="vertical"
                 android:layout_height="200dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
@@ -174,6 +179,7 @@
             <TextView
                 android:id="@+id/resumeEducationThreeReviewLabel"
                 android:layout_width="match_parent"
+                android:scrollbars="vertical"
                 android:layout_height="200dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
@@ -194,6 +200,7 @@
 
             <TextView
                 android:id="@+id/resumeWorkOneReviewLabel"
+                android:scrollbars="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginStart="30dp"
@@ -216,6 +223,7 @@
             <TextView
                 android:id="@+id/resumeWorkTwoReviewLabel"
                 android:layout_width="match_parent"
+                android:scrollbars="vertical"
                 android:layout_height="200dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
@@ -237,6 +245,7 @@
             <TextView
                 android:id="@+id/resumeWorkThreeReviewLabel"
                 android:layout_width="match_parent"
+                android:scrollbars="vertical"
                 android:layout_height="200dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"

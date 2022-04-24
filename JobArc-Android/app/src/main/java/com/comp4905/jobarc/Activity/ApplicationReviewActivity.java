@@ -2,6 +2,7 @@ package com.comp4905.jobarc.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -137,6 +138,7 @@ public class ApplicationReviewActivity extends AppCompatActivity {
 
     public void loadResumeData(){
         name.setText(resume.getJobseekerName());
+        summary.setMovementMethod(new ScrollingMovementMethod());
         summary.setText(resume.getDescription());
         skills.setText(resume.getSkills());
         certifications.setText(resume.getCertifications());
