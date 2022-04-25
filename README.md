@@ -1,5 +1,4 @@
 # JobArc System
-
 <br>
 Demo: https://youtu.be/Q1h6ZhbhtsA
 <br>
@@ -7,7 +6,7 @@ Demo: https://youtu.be/Q1h6ZhbhtsA
 
 
 <img src="jobarc_banner.jpg" width="600" height="500">
-
+<br>
 ## SETUP INSTRUCTIONS
 
 Step 1:
