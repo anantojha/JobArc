@@ -5,9 +5,8 @@ Demo: https://youtu.be/Q1h6ZhbhtsA
 <br>
 <br>
 
-![JobArcSystem](jobarc_banner.jpg)
 
-
+<img src="jobarc_banner.jpg" width="600" height="500">
 
 ## SETUP INSTRUCTIONS
 
