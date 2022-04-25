@@ -20,7 +20,7 @@ Step 1:
 		> create database jobarc;
 		> use database jobarc;
 
-	A backup file is provided to add data to db instance (backup of demo db instance)
+	A backup .sql file is provided to add data to db instance (backup of demo db instance)
 
 Step 2: 
 	
