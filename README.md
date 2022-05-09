@@ -3,7 +3,7 @@
 Demo: https://youtu.be/Q1h6ZhbhtsA
 <br>
 
-<img src="jobarc_banner.jpg" width="600" height="500">
+<img src="images/phone1.png" width="300" height="500">  <img src="images/consol1.png" width="500" height="500">
 
 ## SETUP INSTRUCTIONS
 
