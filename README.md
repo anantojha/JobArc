@@ -40,3 +40,11 @@ Step 3:
 		> Import 'JobArc' into IntelliJ IDEA IDE
 		> Run after build is complete 
 
+
+### Screenshots
+
+<img src="images/phone3.png" width="300" height="500">
+<img src="images/phone2.png" width="300" height="500">
+<img src="images/phone4.png" width="300" height="500">
+<img src="images/consol2.png" width="500" height="500">
+
